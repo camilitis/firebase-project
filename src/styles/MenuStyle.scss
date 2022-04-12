@@ -1,0 +1,109 @@
+:root{
+  --color-bg-primary-offset: #f1f3f7;
+  --color-bg-secondary: #fff;
+  --color-text-primary: #3a3c42;
+  --color-text-primary-offset: #898c94;
+  --color-black: var(--color-text-primary);
+}
+
+.menu-container{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-secondary);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(#404040, 0.15);
+  left: 10%;
+}
+
+.menu-list {
+  margin: 0;
+  display: block;
+  width: 100%;
+  padding: 8px;
+  & + .menu-list {
+    border-top: 1px solid #ddd;
+  }
+}
+.menu-sub-list {
+  display: none;
+  padding: 8px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(#404040, 0.15);
+  position: absolute;
+  left: 100%;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  flex-direction: column;
+  &:hover {
+    display: flex;
+  }
+}
+.menu-item {
+  position: relative;
+}
+.menu-button {
+  font: inherit;
+  border: 0;
+  padding: 8px 8px;
+  padding-right: 36px;
+  width: 100%;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--color-bg-secondary);
+  &:hover {
+    background-color: var(--color-bg-primary-offset);
+    & + .menu-sub-list {
+      display: flex;
+    }
+    svg {
+      stroke: var(--color-text-primary);
+    }
+  }
+  svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    stroke: var(--color-text-primary-offset);
+    &:nth-of-type(2) {
+      margin-right: 0;
+      position: absolute;
+      right: 8px;
+    }
+  }
+
+  &--delete {
+    &:hover {
+      color: red;
+      svg:first-of-type {
+        stroke: red;
+      }
+    }
+  }
+  &--black {
+    svg:first-of-type {
+      stroke: var(--color-black);
+    }
+  }
+  
+  &--checked {
+    svg:nth-of-type(2) {
+      stroke: var(--color-purple);
+    }
+  }
+}

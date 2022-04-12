@@ -1,13 +1,8 @@
 <template>
+    <div class="projects-status">
+      {{ this.tasks.length }} tasks in total
+    </div>
     <div class="projects-section">
-      <div class="projects-section-header">
-        <p>Tasks</p>
-        <h3>{{this.$store.state.todaysdate}}</h3>
-      </div>
-        <div class="projects-status">
-          {{ this.tasks.length }} tasks in total
-        </div>
-
       <ul class="jsGridView project-boxes">
 
         <vue-feather v-if="this.dataMessage == 'loading'" class="loader" type="loader" animation="spin"></vue-feather>
@@ -179,4 +174,5 @@ export default {
 </script>
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
+@import '@/styles/TasksListStyle.scss';
 </style>

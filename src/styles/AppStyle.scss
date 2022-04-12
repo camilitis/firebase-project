@@ -1,18 +1,34 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
 html, body {
   width: 100%;
   height: 100vh;
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
+  background-color: var(--bg-color);
+  li{
+    list-style: none;
+  }
 }
-
+#app{
+  transition: .2s;
+  padding: 0 20px;
+  color: var(--text-color)
+}
 :root{
-  --bg: rgba(157, 177, 204, 0.412);
+  --bg-color: #DAE7FF;
   --text-color: #1F1C2E;
+  --content-section: #fff;
+  --selected-color: #ff4339d0;
 }
 .dark:root{
-  --bg: #111827;
+  --bg-color: #02131e;
   --text-color: #FFFFFF;
+  --content-section: #15202B;
+  --selected-color: #1E9BF1;
 
   .moon svg{
   fill: var(--text-color);
@@ -41,15 +57,63 @@ html, body {
   width: 250px;
   margin-right: 10px;
   text-align: center;
+  background-color: var(--content-section);
+  a, span{
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 13px;
+    border-radius: 22px;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    text-align: left;
+    align-items: center;
+    cursor: pointer;
+    &:hover{
+      background-color: var(--bg-color);
+    }
+    &.router-link-exact-active {
+      background-color: var(--selected-color);
+      color: var(--content-section);
+    }
+  }
+}
+
+.content{
+  height: 90vh;
+  background-color: var(--content-section);
+  border-radius: 32px;
+  padding: 30px 30px 0 30px;
+  overflow: hidden;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(#404040, 0.05);
+  flex: 3;
+}
+
+.projects-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--main-color);
+  p {
+    font-size: 24px;
+    font-weight: 700;
+    opacity: .9;
+    margin: 0;
+    color: var(--main-color);
+  }
 }
 
 .high { 
-  background-color: #f2827651;
-  border: 3px solid #F28376 }
+  background-color: #fa5b586e;
+  border: 3px solid #FA5B58 }
 .medium { 
-  background-color: #f5d58f56;
-  border: 3px solid #F5D48F;}
+  background-color: #ffcf6774;
+  border: 3px solid #FFCE67;}
 .low { 
-  background-color: #c8dd9f5c;
-  border: 3px solid #C8DD9F;
+  background-color: #77be9381;
+  border: 3px solid #77BE93;
 }

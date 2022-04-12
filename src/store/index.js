@@ -15,6 +15,8 @@ export default createStore({
     todayMaxAttr: '',
     todaysdate: '',
     taskdate: '',
+
+    numberOfTasks: null,
   },
   getters: {
   },
@@ -50,7 +52,7 @@ export default createStore({
           this.state.islogged = false
         }
       })
-    },
+    }
   },
   actions: {
     signInWithGoogle({commit}){

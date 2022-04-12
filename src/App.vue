@@ -23,6 +23,10 @@
       <span @click="logout"><vue-feather type="log-out"></vue-feather>Logout</span>
     </nav>
     <div class="content">
+      <div class="projects-section-header">
+        <p>Tasks</p>
+        <h3>{{this.$store.state.todaysdate}}</h3>
+      </div>
       <router-view/>
     </div>
   </section>
@@ -37,7 +41,7 @@ let auth
 
 export default{
   components:{
-    AddPost
+    AddPost,
   },
   methods:{
     logout(){
@@ -48,7 +52,6 @@ export default{
       })
       }
     },
-
     togglemode(){
       document.documentElement.classList.toggle('dark')
 
@@ -62,7 +65,6 @@ export default{
         })
       }
     },
-
     openAddTask(){
       document.getElementById("myDropdown").classList.toggle("show")
     },
@@ -77,12 +79,5 @@ export default{
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
 @import '@/styles/DropdownStyle.scss';
-
-nav {
-  a {
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import '@/styles/MenuStyle.scss';
 </style>
