@@ -22,7 +22,7 @@
   }
   
   .project-box {
-    border-radius: 30px;
+    border-radius: var(--border-radius);
     padding: 16px;
     &-header {
       display: flex;

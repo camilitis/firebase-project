@@ -1,5 +1,7 @@
 <template>
-  <h2>Create an account</h2>
+<div class="log">
+<h2>Create an account</h2>
+
   <section>
     <input v-model="state.username" type="text" placeholder="Username" spellcheck="false">
     <p v-if="v$.username.$error"> {{ v$.username.$errors[0].$message }} </p>
@@ -28,6 +30,7 @@
     Have an account already?
     <router-link to="/signin">Log in</router-link>
   </nav>
+</div>
 </template>
 <script>
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
@@ -129,3 +132,6 @@ export default {
   }
 }
 </script>
+<style>
+@import '@/styles/LogStyle.scss';
+</style>

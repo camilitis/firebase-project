@@ -1,5 +1,5 @@
 <template>
-  <section class="header">
+  <section v-if="this.$store.state.userid" class="header">
     <h2 v-if="this.$store.state.username" style="text-transform: uppercase">{{ this.$store.state.username }}'s to do list</h2>
     <h2 v-else style="text-transform: uppercase;">Your to do list</h2>
 
@@ -15,7 +15,7 @@
     </div>
   </section>
 
-  <section class="app">
+  <section v-if="this.$store.state.userid" class="app">
     <nav class="sidebar">
       <router-link to="/"><vue-feather type="calendar"></vue-feather>My projects</router-link>
       <router-link to="/wishlist"><vue-feather type="edit-3"></vue-feather>Wish list</router-link>
@@ -29,6 +29,10 @@
       </div>
       <router-view/>
     </div>
+  </section>
+
+  <section v-if="!this.$store.state.userid">
+    <router-view/>
   </section>
 </template>
 <script>

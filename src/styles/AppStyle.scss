@@ -19,10 +19,12 @@ html, body {
   color: var(--text-color)
 }
 :root{
-  --bg-color: #DAE7FF;
+  --bg-color: #ffd8c8;
   --text-color: #1F1C2E;
   --content-section: #fff;
-  --selected-color: #ff4339d0;
+  --selected-color: #FF5455;
+
+  --border-radius: 15px;
 }
 .dark:root{
   --bg-color: #02131e;
@@ -52,7 +54,7 @@ html, body {
   display: flex;
   flex-direction: column;
   background-color: var(--projects-section);
-  border-radius: 32px;
+  border-radius: var(--border-radius);
   padding: 30px 30px 0 30px;
   width: 250px;
   margin-right: 10px;
@@ -63,7 +65,7 @@ html, body {
     text-decoration: none;
     margin: 10px 0;
     padding: 13px;
-    border-radius: 22px;
+    border-radius: var(--border-radius);
     text-align: center;
     display: flex;
     justify-content: space-evenly;
@@ -83,7 +85,7 @@ html, body {
 .content{
   height: 90vh;
   background-color: var(--content-section);
-  border-radius: 32px;
+  border-radius: var(--border-radius);
   padding: 30px 30px 0 30px;
   overflow: hidden;
   width: auto;
