@@ -12,22 +12,28 @@
   transform: translate(-50%, -50%);
   margin: 0;
   padding: 20px;
+  svg{
+    width: 400px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-self: center;
+    margin: 0 auto;
+  }
 }
 
 input{
   border-radius: var(--border-radius);
   padding: 13px;
   margin: 10px;
-  border: 2px solid #CACACA;
+  border: 2px solid var(--grey-color);
   width: 200px;
+  &:focus{
+    outline: none;
+    border: 2px solid var(--selected-color);
+  }
 }
-input:focus{
-  outline: none;
-  border: 2px solid var(--selected-color);
-}
-a:hover{
-  color: white;
-}
+
 .register-btn{
   color: var(--text-color);
   text-decoration: none;
@@ -37,30 +43,68 @@ a:hover{
   text-align: center;
   background-color: var(--selected-color);
   cursor: pointer;
-}
-svg{
-  width: 450px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-self: center;
+  &:hover{
+    color: white;
+  }
 }
 
-.registration-right{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+.error{
+  font-weight: bold;
+  text-align: center;
 }
-.registration-right-input{
-  display: flex;
-  flex-direction: column;
-}
-.registration-right-svg{
-  width: 50px;
-  display:flex;
-  justify-content: space-between;
-  cursor: pointer;
+
+.registration{
+
+  &-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    width: 400px;
+    &-input{
+      display: flex;
+      flex-direction: column;
+      }
+    &-svg{
+      display: flex;
+      justify-content: space-evenly;
+      width: 30%;
+      height: 0;
+      svg{
+        height: auto;
+        width: 35px;
+        border: 2px solid #555358;
+        border-radius: 50%;
+        padding: 4px;
+        cursor: pointer;
+        &:hover{
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &-options{
+    width: 80%;
+    text-align: center;
+    border-bottom: 1px solid var(--grey-color);
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+    span{
+      background: white;
+      padding:0 10px;
+    }
+  }
+
+  &-link{
+    color: var(--selected-color);
+    text-decoration: none;
+    &:hover{
+      color: var(--text-color);
+      text-decoration: underline;
+    }
+  }
 }
 
 @media screen and (max-width: 1000px) {
