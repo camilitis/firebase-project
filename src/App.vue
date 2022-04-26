@@ -1,17 +1,20 @@
 <template>
-  <section v-if="this.$store.state.userid" class="header">
+  <section class="header">
     <h2 v-if="this.$store.state.username" style="text-transform: uppercase">{{ this.$store.state.username }}'s to do list</h2>
     <h2 v-else style="text-transform: uppercase;">Your to do list</h2>
 
     <div class="header-right">
       <vue-feather @click="togglemode" class="moon" type="moon"></vue-feather>
       <div class="dropdown">
-        <vue-feather @click="openAddTask" class="add-button" type="plus"></vue-feather>
+        <vue-feather 
+          v-if="this.$store.state.userid"
+          @click="openAddTask"
+          class="addTask-button" type="plus"></vue-feather>
         <div id="myDropdown" class="dropdown-content">
           <AddPost/>
         </div>
       </div>
-      <vue-feather type="user"></vue-feather>
+      <!-- <vue-feather v-if="this.$store.state.userid" type="user"></vue-feather> -->
     </div>
   </section>
 
@@ -24,7 +27,9 @@
     </nav>
     <div class="content">
       <div class="projects-section-header">
-        <p>Tasks</p>
+        <p v-if="this.$route.path == '/'">My projects</p>
+        <p v-else-if="this.$route.path == '/wishlist'">Wish List</p>
+        <p v-else-if="this.$route.path == '/profile'">Settings</p>
         <h3>{{this.$store.state.todaysdate}}</h3>
       </div>
       <router-view/>
@@ -34,8 +39,6 @@
   <section v-if="!this.$store.state.userid">
     <router-view/>
   </section>
-
-
 <!-- 
           <section>
             <label for="priority">Modify priority:</label>
@@ -87,7 +90,7 @@ export default{
       }
     },
     openAddTask(){
-      document.getElementById("myDropdown").classList.toggle("show")
+      document.getElementById('myDropdown').classList.toggle('show')
     },
   },
   beforeCreate(){
@@ -99,6 +102,5 @@ export default{
 </script>
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
-@import '@/styles/DropdownStyle.scss';
 @import '@/styles/MenuStyle.scss';
 </style>

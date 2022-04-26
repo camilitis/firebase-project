@@ -22,16 +22,19 @@ html, body {
   --bg-color: #F2F2F2;
   --text-color: #1F1C2E;
   --content-section: #fff;
-  --selected-color: #00BA7C;
   --grey-color: #cacaca;
 
   --border-radius: 15px;
+  --selected-color: rgb(0, 186, 124);
+
+  .moon svg:hover{
+    fill: var(--text-color);
+  }
 }
 .dark:root{
-  --bg-color: #02131e;
+  --bg-color: #000;
   --text-color: #FFFFFF;
-  --content-section: #15202B;
-  --selected-color: #1E9BF1;
+  --content-section: #1f1f1f;
 
   .moon svg{
   fill: var(--text-color);
@@ -42,9 +45,15 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &-right{
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+  }
 }
-.header-right{
-  display: flex;
+.addTask-button, .moon{
+  cursor: pointer;
 }
 
 .app{
@@ -119,4 +128,32 @@ html, body {
 .low { 
   background-color: #77be9381;
   border: 3px solid #77BE93;
+}
+
+input{
+  border-radius: var(--border-radius);
+  padding: 13px;
+  margin: 10px;
+  border: 2px solid var(--grey-color);
+  width: 250px;
+  background-color: var(--content-section);
+  color: var(--text-color);
+
+  &::-webkit-input-placeholder {
+    color: gray;
+  }
+  &:-ms-input-placeholder {
+    color: gray;
+  }
+  &::-moz-placeholder {
+    color: gray;
+  }
+  &:-moz-placeholder {
+    color: gray;
+  }
+
+  &:focus{
+    outline: none;
+    border: 2px solid var(--selected-color);
+  }
 }

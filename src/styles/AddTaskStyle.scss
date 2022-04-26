@@ -1,0 +1,56 @@
+.addTask{
+
+  &-button{
+    &:hover{
+      background-color: var(--selected-color);
+      border-radius: 10px;
+    }
+    &-clicked{
+      background-color: var(--selected-color);
+      border-radius: 10px;
+    }
+  }
+
+  &-section{
+    padding: 10px;
+    display: flex;
+    &-duedate{
+      flex: 1;
+      &-label{
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      &-input{
+        width: 100%;
+        height: 30px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        padding: 0 10px;
+        font-size: 1.2rem;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 35px;
+  background-color: var(--content-section);
+  min-width: 180px;
+  overflow: auto;
+  z-index: 1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(#404040, 0.15);
+}
+.show {display: block;}

@@ -1,22 +1,28 @@
 <template>
-  <form>
-    <label for="content">Add your new task:</label>
-    <input v-model="state.content" id="content" type="text" autocomplete="off">
+  <div class="addTask-section">
+    <form class="addTask-form">
+      <label for="content">Add your new task:</label>
+      <input v-model="state.content" id="content" type="text" autocomplete="off">
 
-    <label for="duedate">Due date:</label>
-    <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
-    <input v-model="this.noduedate" id="noduedate" type="checkbox">
-    <label for="noduedate">No due date</label>
+      <div class="addTask-section-duedate">
+        <label for="duedate">Due date:</label>
+        <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
+        <input v-model="this.noduedate" id="noduedate" type="checkbox">
+        <label for="noduedate">No due date</label>
+      </div>
 
-    <label for="priority">Priority:</label>
-    <select v-model="state.priority" id="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
+      <br>
 
-    <button @click="addpost()" type="button">Add Post</button>
-  </form>
+      <label for="priority">Priority:</label>
+      <select v-model="state.priority" id="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
+      <a @click="addpost()" type="button" class="register-btn">Add Post</a>
+    </form>
+  </div>
 </template>
 <script>
 import { reactive, computed } from 'vue'
@@ -66,6 +72,8 @@ export default {
           done: false
         })
         .then(() => {
+          document.getElementById("myDropdown").classList.toggle("show")
+
           this.state.content = ''
           this.state.priority = ''
           this.duedate = ''
@@ -76,3 +84,6 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '@/styles/AddTaskStyle.scss';
+</style>
