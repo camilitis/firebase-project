@@ -15,7 +15,10 @@
     padding: 10px;
     display: flex;
     &-duedate{
-      flex: 1;
+      span{
+        display: flex;
+        align-content: center;
+      }
       &-label{
         font-size: 1.2rem;
         font-weight: bold;

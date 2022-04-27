@@ -130,7 +130,7 @@ html, body {
   border: 3px solid #77BE93;
 }
 
-input{
+input[type=text], input[type=date], input[type=radio]{
   border-radius: var(--border-radius);
   padding: 13px;
   margin: 10px;

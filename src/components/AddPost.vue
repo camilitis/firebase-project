@@ -7,8 +7,11 @@
       <div class="addTask-section-duedate">
         <label for="duedate">Due date:</label>
         <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
-        <input v-model="this.noduedate" id="noduedate" type="checkbox">
-        <label for="noduedate">No due date</label>
+
+        <span>
+          <input v-model="this.noduedate" id="noduedate" type="checkbox">
+          <label for="noduedate">No due date</label>
+        </span>
       </div>
 
       <br>
