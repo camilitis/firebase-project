@@ -24,18 +24,25 @@
   .project-box {
     border-radius: var(--border-radius);
     padding: 16px;
+    min-height: 200px;
     &-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 16px;
     }
-    &-content-header {
-      text-align: center;
-      margin-bottom: 16px;
-    }
     &-wrapper {
       padding: 8px;
+    }
+
+    .taskdone{
+      text-decoration-line: line-through;
+      text-decoration-color: var(--text-color);
+      text-decoration-thickness: 2px;
+    }
+    .taskprogress{
+      opacity: .7;
+      margin-left: 10px;
     }
   }
   .more-wrapper {
@@ -44,15 +51,15 @@
   
   .box-content-header {
     font-size: 16px;
-    font-weight: 700;
-    opacity: .7;
+    font-weight: 600;
   }
-  
+
   .project-box-footer {
     display: flex;
     justify-content: space-between;
     padding-top: 16px;
     position: relative;
+    
   }
   .days-left {
     background-color: rgba(255,255,255,0.6);
@@ -61,8 +68,8 @@
     flex-shrink: 0;
     padding: 6px 16px;
     font-weight: 700;
+    opacity: .8;
   }
-  
   .loader{
     position: absolute;
     height: 35px;

@@ -25,14 +25,20 @@
               </ul>
 
               <ul class="menu-list">
-                <li class="menu-item"><button class="menu-button menu-button--black"><vue-feather type="circle"></vue-feather>No status<vue-feather type="chevron-right"></vue-feather></button>
+                <li class="menu-item"><button class="menu-button"><vue-feather type="circle"></vue-feather>No status<vue-feather type="chevron-right"></vue-feather></button>
                   <ul class="menu-sub-list">
-                    <li class="menu-item"><button 
-                      @click="settoinprogress(item.id)" class="menu-button menu-button--purple"><vue-feather type="circle"></vue-feather>In progress</button></li>
-                    <li class="menu-item"><button 
-                      @click="settodone(item.id)" class="menu-button menu-button--green"><vue-feather type="circle"></vue-feather>Done</button></li>
-                    <li 
-                      @click="settonotdone(item.id)" class="menu-item"><button class="menu-button menu-button--black menu-button--checked"><vue-feather type="circle"></vue-feather>Not done<vue-feather type="check"></vue-feather></button></li>
+                    <li class="menu-item">
+                      <button @click="settoinprogress(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>In progress
+                        <vue-feather v-if="item.done === 'progress'" type="check"></vue-feather>
+                      </button></li>
+                    <li class="menu-item">
+                      <button @click="settodone(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>Done
+                        <vue-feather v-if="item.done === true" type="check"></vue-feather>
+                      </button></li>
+                    <li class="menu-item">
+                      <button @click="settonotdone(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>Not done
+                        <vue-feather v-if="item.done === false" type="check"></vue-feather>
+                      </button></li>
                   </ul>
                 </li>
               </ul>
@@ -47,15 +53,16 @@
             <div class="project-box-header">
               <span>{{ item.date }}</span>
               <div class="more-wrapper">
-                <vue-feather @click="showMenu(item.id)" type="more-vertical"></vue-feather>
+                <vue-feather @click="showMenu(item.id)" type="more-vertical" style="cursor: pointer;"></vue-feather>
               </div>
             </div>
-        <div class="project-box-content-header">
+        <div>
+          <p v-if="item.done === true" class="box-content-header taskdone">{{ item.content }}</p>
+          <p v-else-if="item.done == 'progress'" class="box-content-header">{{ item.content }}</p>
+          <p v-else-if="item.done === false" class="box-content-header">{{ item.content }}</p>
 
-          <p v-if="item.done === true" style="text-decoration-line: line-through;" class="box-content-header">{{ item.content }}</p>
-          <p v-else-if="item.done === false || item.done == 'progress'" class="box-content-header">{{ item.content }}</p>
 
-          <p v-if="item.done == 'progress'">In progress...</p>
+          <p v-if="item.done == 'progress'" class="taskprogress">In progress...</p>
         </div>
         <div class="project-box-footer">
           <div class="days-left">
