@@ -1,6 +1,7 @@
 .projects-section {
   overflow-y: auto;
   overflow-x: hidden;
+  cursor: default;
   }
 
   .projects-status {
@@ -25,6 +26,9 @@
     border-radius: var(--border-radius);
     padding: 16px;
     min-height: 200px;
+    &:hover{
+      opacity: .95 !important;
+    }
     &-header {
       display: flex;
       align-items: center;

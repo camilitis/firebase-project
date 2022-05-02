@@ -119,14 +119,46 @@ html, body {
   }
 }
 
+.projects-status {
+  display: flex;
+}
+.item-status {
+  display: flex;
+  flex-direction: column;
+  margin-right: 16px;
+  
+  &:not(:last-child) .status-type:after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translatey(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: 1px solid var(--secondary-color);
+  }
+}
+.status-number {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: var(--main-color);
+}
+.status-type {
+  position: relative;
+  padding-right: 24px;
+  color: var(--secondary-color);
+}
+
 .high { 
-  background-color: #fa5b586e;
+  background-color: #fa5b587e;
   border: 3px solid #FA5B58 }
 .medium { 
-  background-color: #ffcf6774;
+  background-color: #e7b956a0;
   border: 3px solid #FFCE67;}
 .low { 
-  background-color: #77be9381;
+  background-color: #77be93a1;
   border: 3px solid #77BE93;
 }
 

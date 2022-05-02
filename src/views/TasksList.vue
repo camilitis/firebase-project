@@ -1,7 +1,20 @@
 <template>
+
     <div class="projects-status">
-      {{ this.tasks.length }} tasks in total
+      <div class="item-status">
+        <span class="status-number">{{ this.notdonetasks.length }}</span>
+        <span class="status-type">In Progress</span>
+      </div>
+      <div class="item-status">
+        <span class="status-number">{{ this.donetasks.length }}</span>
+        <span class="status-type">Completed</span>
+      </div>
+      <div class="item-status">
+        <span class="status-number">{{ this.tasks.length }}</span>
+        <span class="status-type">Total Projects</span>
+      </div>
     </div>
+
     <div class="projects-section">
       <ul class="jsGridView project-boxes">
 
@@ -49,7 +62,9 @@
           </div>
           <!-- MENU -->
 
-          <div class="project-box" :class="item.priority">
+          <div 
+            :class="item.priority"
+            :style="[item.done === true ? {opacity: .6} : {opacity: 1}]" class="project-box">
             <div class="project-box-header">
               <span>{{ item.date }}</span>
               <div class="more-wrapper">
@@ -60,14 +75,14 @@
           <p v-if="item.done === true" class="box-content-header taskdone">{{ item.content }}</p>
           <p v-else-if="item.done == 'progress'" class="box-content-header">{{ item.content }}</p>
           <p v-else-if="item.done === false" class="box-content-header">{{ item.content }}</p>
-
-
-          <p v-if="item.done == 'progress'" class="taskprogress">In progress...</p>
         </div>
         <div class="project-box-footer">
           <div class="days-left">
             <span v-if="item.duedate == ''">No due date</span>
             <span v-else>{{ this.duedatecountdown(item.duedate) }}</span>
+          </div>
+          <div v-if="item.done == 'progress'" class="days-left">
+            <span>In progress</span>
           </div>
         </div>
           </div>
@@ -104,6 +119,9 @@ export default {
   data(){
     return {
       tasks: [],
+      donetasks: [],
+      notdonetasks: [],
+
       dataMessage: '',
       menuactive: null
     }
@@ -119,12 +137,23 @@ export default {
       const colRef = ref(db, 'users/' + this.$store.state.userid + '/tasks')
 
       onValue(colRef, (snapshot) => {
+
         this.tasks = []
+        this.donetasks = []
+        this.notdonetasks = []
+
         snapshot.forEach((element) => {
           this.tasks.push({ ...element.val(), id: element.key })
-        })
 
-      this.dataMessage = 'nodata'
+          if(element.val().done === true){
+            this.donetasks.push({ id: element.key, done: element.val().done })
+          }
+          if(element.val().done == 'progress'){
+            this.notdonetasks.push({ id: element.key, done: element.val().done })
+          }
+        })
+        this.dataMessage = 'nodata'
+
       })
     },
 
