@@ -1,12 +1,13 @@
 :root{
-  --color-bg-primary-offset: #f1f3f7;
-
-  --color-text-primary: #3a423b;
-  --color-text-primary-offset: #898c94;
+  --hover-menu-color: var(--bg-color);
+  --menu-svg-color: #898c94;
+  --menu-svg-color-hover: #3a423b;
 }
 
 .dark:root{
-  --color-bg-primary-offset: #181818;
+  --hover-menu-color: #383839;
+  --menu-svg-color: #4a4a4a;
+  --menu-svg-color-hover: #6b6d71;
 }
 
 .menu-container{
@@ -71,12 +72,12 @@
   background-color: var(--content-section);
   cursor: pointer;
   &:hover {
-    background-color: #464649;
+    background-color: var(--hover-menu-color);
     & + .menu-sub-list {
       display: flex;
     }
-    svg {
-      stroke: var(--color-text-primary);
+    svg{
+      stroke: var(--menu-svg-color-hover);
     }
   }
   svg {
@@ -84,7 +85,7 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
-    stroke: var(--color-text-primary-offset);
+    stroke: var(--menu-svg-color);
     &:nth-of-type(2) {
       margin-right: 0;
       position: absolute;

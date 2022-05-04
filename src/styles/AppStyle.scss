@@ -27,6 +27,8 @@ html, body {
   --border-radius: 15px;
   --selected-color: rgb(0, 186, 124);
 
+  --selected-hover-color: rgb(3, 144, 97);
+
   .moon svg:hover{
     fill: var(--text-color);
   }
@@ -59,7 +61,6 @@ html, body {
 .app{
   display: flex;
 }
-
 .sidebar{
   display: flex;
   flex-direction: column;
@@ -83,11 +84,14 @@ html, body {
     align-items: center;
     cursor: pointer;
     &:hover{
-      background-color: var(--bg-color);
+      background-color: var(--hover-menu-color); //inherited from menustyle.scss
     }
     &.router-link-exact-active {
       background-color: var(--selected-color);
       color: var(--content-section);
+      &:hover{
+        background-color: var(--selected-hover-color);
+      }
     }
   }
 }
@@ -162,7 +166,7 @@ html, body {
   border: 3px solid #77BE93;
 }
 
-input[type=text], input[type=date], input[type=radio]{
+input[type=text], input[type=date], input[type=radio], input[type=password]{
   border-radius: var(--border-radius);
   padding: 13px;
   margin: 10px;

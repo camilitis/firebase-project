@@ -10,6 +10,8 @@
         <label for="duedate">Due date:</label>
         <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
 
+        <br>
+
         <span>
           <input v-model="this.noduedate" id="noduedate" type="checkbox">
           <label for="noduedate">No due date</label>
@@ -25,7 +27,9 @@
         <option value="high">High</option>
       </select>
 
-      <a @click="addpost()" type="button" class="register-btn">Add Post</a>
+      <br>
+
+      <p><a @click="addpost()" type="button" class="addTask-btn">Add Post</a></p>
     </form>
   </div>
 </template>

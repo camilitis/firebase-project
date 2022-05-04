@@ -19,6 +19,8 @@
       <a @click="signIn" type="button" class="register-btn">Sign In</a>
     </section>
 
+    <p @click="getguestuser" style="cursor: pointer; opacity: .9;">Get guest user</p>
+
     <p class="registration-options"><span>Or sign in with</span></p>
 
     <div class="registration-right-svg">
@@ -71,6 +73,11 @@ export default {
               this.errorMsg = 'Invalid email or password'
           }
         })
+    },
+    
+    getguestuser(){
+      this.loginform.email = 'newuser@users.com'
+      this.loginform.password = 'user123'
     }
   }
 }

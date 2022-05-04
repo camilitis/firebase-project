@@ -111,7 +111,7 @@ export default {
         content: 'Create an account',
         priority: 'high',
         date: this.today,
-        duedate: 'none',
+        duedate: '',
         done: true
       })
     },

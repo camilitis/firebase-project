@@ -1,3 +1,10 @@
+:root{
+  --task-dropshadow: #40404032;
+}
+.dark:root{
+  --task-dropshadow: #b9b9bb36;
+}
+
 .projects-section {
   overflow-y: auto;
   overflow-x: hidden;
@@ -26,8 +33,10 @@
     border-radius: var(--border-radius);
     padding: 16px;
     min-height: 200px;
+    transition: .2s;
     &:hover{
       opacity: .95 !important;
+      box-shadow: 0 5px 10px var(--task-dropshadow);
     }
     &-header {
       display: flex;

@@ -32,7 +32,7 @@
   background-color: var(--selected-color);
   cursor: pointer;
   &:hover{
-    color: var(--text-color);
+    background-color: var(--selected-hover-color);
   }
 }
 

@@ -1,5 +1,4 @@
 .addTask{
-
   &-button{
     &:hover{
       background-color: var(--selected-color);
@@ -8,33 +7,28 @@
     &-clicked{
       background-color: var(--selected-color);
       border-radius: 10px;
+      &:hover{
+        background-color: var(--selected-hover-color);
+      }
     }
   }
 
   &-section{
     padding: 10px;
     display: flex;
-    &-duedate{
-      span{
-        display: flex;
-        align-content: center;
-      }
-      &-label{
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-right: 10px;
-      }
-      &-input{
-        width: 100%;
-        height: 30px;
-        border-radius: 10px;
-        border: 1px solid var(--border-color);
-        padding: 0 10px;
-        font-size: 1.2rem;
-        &:focus{
-          outline: none;
-        }
-      }
+  }
+
+  &-btn{
+    font-weight: bold;
+    cursor: pointer;
+    color: whitesmoke;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    background-color: var(--selected-color);
+    &:hover{
+      background-color: var(--selected-hover-color)
     }
   }
 }

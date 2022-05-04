@@ -9,7 +9,7 @@
         <vue-feather 
           v-if="this.$store.state.userid"
           @click="openAddTask"
-          class="addTask-button" type="plus"></vue-feather>
+          class="addTask-button" id="addtaskbutton" type="plus"></vue-feather>
         <div id="myDropdown" class="dropdown-content">
           <AddPost/>
         </div>
@@ -91,6 +91,7 @@ export default{
     },
     openAddTask(){
       document.getElementById('myDropdown').classList.toggle('show')
+      document.getElementById('addtaskbutton').classList.toggle('addTask-button-clicked')
     },
   },
   beforeCreate(){
