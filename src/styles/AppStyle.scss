@@ -29,6 +29,13 @@ html, body {
 
   --selected-hover-color: rgb(3, 144, 97);
 
+  --low-bg-color: #77be93a1;
+  --low-border-color: #77BE93;
+  --medium-bg-color: #e7b956a0;
+  --medium-border-color: #fcc754;
+  --high-bg-color: #fa5b587e;
+  --high-border-color: #fa5b58bb;
+
   .moon svg:hover{
     fill: var(--text-color);
   }
@@ -42,6 +49,8 @@ html, body {
   fill: var(--text-color);
   }
 }
+
+.show {display: block;}
 
 .header{
   display: flex;
@@ -94,6 +103,15 @@ html, body {
       }
     }
   }
+}
+
+.app-backdrop{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
 }
 
 .content{
@@ -156,14 +174,14 @@ html, body {
 }
 
 .high { 
-  background-color: #fa5b587e;
-  border: 3px solid #FA5B58 }
+  background-color: var(--high-bg-color);
+  border: 3px solid  var(--high-border-color)}
 .medium { 
-  background-color: #e7b956a0;
-  border: 3px solid #FFCE67;}
+  background-color: var(--medium-bg-color);
+  border: 3px solid var(--medium-border-color);}
 .low { 
-  background-color: #77be93a1;
-  border: 3px solid #77BE93;
+  background-color: var(--low-bg-color);
+  border: 3px solid var(--low-border-color);
 }
 
 input[type=text], input[type=date], input[type=radio], input[type=password]{

@@ -30,27 +30,43 @@
               <ul class="menu-list">
                 <li class="menu-item"><button class="menu-button"><vue-feather type="edit"></vue-feather>Edit<vue-feather type="chevron-right"></vue-feather></button>
                   <ul class="menu-sub-list">
-                    <li @click="$refs.editTask.openModal()" class="menu-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
-                    <li @click="$refs.editDate.openModal()" class="menu-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
-                    <li @click="$refs.editPriority.openModal()" class="menu-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
+                    <li @click="openEditTask(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
+                    <li @click="openEditDate(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
+                    <li @click="openEditPriority(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
                   </ul>
                 </li>
               </ul>
 
               <ul class="menu-list">
-                <li class="menu-item"><button class="menu-button"><vue-feather type="circle"></vue-feather>No status<vue-feather type="chevron-right"></vue-feather></button>
+                <li class="menu-item">
+                  <button class="menu-button" >
+                    <vue-feather 
+                      v-if="item.done == false || item.done == 'progress'"
+                      :class="[item.done === false ? 'menu-svg-notdone' : 'menu-svg-progress']" type="circle">
+                    </vue-feather>
+                    <vue-feather
+                      v-if="item.done == true" type="check-circle" class="checkcircle">
+                    </vue-feather>
+                        <span v-if="item.done == true">Done</span>
+                        <span v-else-if="item.done == false">Not done</span>
+                        <span v-if="item.done == 'progress'">In progress</span>
+                    <vue-feather type="chevron-right"></vue-feather>
+                  </button>
                   <ul class="menu-sub-list">
                     <li class="menu-item">
-                      <button @click="settoinprogress(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>In progress
-                        <vue-feather v-if="item.done === 'progress'" type="check"></vue-feather>
+                      <button @click="settoinprogress(item.id)" class="menu-button">
+                        In progress
+                        <vue-feather v-if="item.done === 'progress'" class="menu-svg-progress" type="check"></vue-feather>
                       </button></li>
                     <li class="menu-item">
-                      <button @click="settodone(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>Done
-                        <vue-feather v-if="item.done === true" type="check"></vue-feather>
+                      <button @click="settodone(item.id)" class="menu-button">
+                        Done
+                        <vue-feather v-if="item.done === true" class="checkcircle" type="check"></vue-feather>
                       </button></li>
                     <li class="menu-item">
-                      <button @click="settonotdone(item.id)" class="menu-button"><vue-feather type="circle"></vue-feather>Not done
-                        <vue-feather v-if="item.done === false" type="check"></vue-feather>
+                      <button @click="settonotdone(item.id)" class="menu-button">
+                        Not done
+                        <vue-feather v-if="item.done === false" class="menu-svg-notdone" type="check"></vue-feather>
                       </button></li>
                   </ul>
                 </li>
@@ -61,6 +77,20 @@
             </div>
           </div>
           <!-- MENU -->
+
+
+          <div :id="'edittask-' + item.id" class="menu-edit">
+            AAAA
+          </div>
+
+          <div :id="'editdate-' + item.id" class="menu-edit">
+            BBBB
+          </div>
+
+          <div :id="'editpriority-' + item.id" class="menu-edit">
+            CCCC
+          </div>
+
 
           <div 
             :class="item.priority"
@@ -90,28 +120,14 @@
       </ul>
 </div>
 
-  <ModalComponent ref="editTask">
-    <template v-slot:body>
-      Edit task
-    </template>
-  </ModalComponent>
+  <div 
+    v-if="this.menuactive !== null"
+    @click="hidemenu" class="app-backdrop"></div>
 
-  <ModalComponent ref="editDate">
-    <template v-slot:body>
-      Edit date
-    </template>
-  </ModalComponent>
-
-  <ModalComponent ref="editPriority">
-    <template v-slot:body>
-      Edit priority
-    </template>
-  </ModalComponent>
 </template>
 <script>
 import { ref, onValue, update, remove } from "firebase/database"
 import db from '@/main.js'
-import ModalComponent from '@/components/ModalComponent.vue'
 
 export default {
   name: 'TasksList',
@@ -125,10 +141,6 @@ export default {
       dataMessage: '',
       menuactive: null
     }
-  },
-
-  components:{
-    ModalComponent
   },
   methods:{
     showData(){
@@ -157,6 +169,16 @@ export default {
       })
     },
 
+    openEditTask(id){
+      document.getElementById('edittask-' + id).classList.toggle('menu-edit-show')
+    },
+    openEditDate(id){
+      document.getElementById('editdate-' + id).classList.toggle('menu-edit-show')
+    },
+    openEditPriority(id){
+      document.getElementById('editpriority-' + id).classList.toggle('menu-edit-show')
+    },
+
     settodone(id){
       update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { done: true })
     },
@@ -169,19 +191,9 @@ export default {
       update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { done: 'progress' })
     },
 
-    // toggledone(id){
-    //   var taskRef = ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id + '/done')
-    //   var task = ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id)
-
-    //   onValue(taskRef, (snapshot) => {
-    //     if(snapshot.val() == true){
-    //       update(task, { done: false })
-    //     }else if(snapshot.val() == false){
-    //       update(task, { done: true })
-    //     }
-    //   }, {onlyOnce: true})
-    //   return
-    // },
+    hidemenu(){
+      this.menuactive = null
+    },
 
     duedatecountdown(duedate){
       var dt1 = new Date().getTime()

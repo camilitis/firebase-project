@@ -8,13 +8,12 @@
       <div class="dropdown">
         <vue-feather 
           v-if="this.$store.state.userid"
-          @click="openAddTask"
+          @click="toggleaddtask"
           class="addTask-button" id="addtaskbutton" type="plus"></vue-feather>
         <div id="myDropdown" class="dropdown-content">
           <AddPost/>
         </div>
       </div>
-      <!-- <vue-feather v-if="this.$store.state.userid" type="user"></vue-feather> -->
     </div>
   </section>
 
@@ -39,6 +38,12 @@
   <section v-if="!this.$store.state.userid">
     <router-view/>
   </section>
+
+  <div 
+    v-if="addtaskopen == true"
+    @click="toggleaddtask" class="app-backdrop">
+  </div>
+
 <!-- 
           <section>
             <label for="priority">Modify priority:</label>
@@ -64,6 +69,11 @@ import AddPost from '@/components/AddPost.vue'
 let auth
 
 export default{
+  data(){
+    return {
+      addtaskopen: false,
+    }
+  },
   components:{
     AddPost,
   },
@@ -89,9 +99,14 @@ export default{
         })
       }
     },
-    openAddTask(){
+    toggleaddtask(){
       document.getElementById('myDropdown').classList.toggle('show')
       document.getElementById('addtaskbutton').classList.toggle('addTask-button-clicked')
+      if(this.addtaskopen == true){
+        this.addtaskopen = false
+      }else{
+        this.addtaskopen = true
+      }
     },
   },
   beforeCreate(){

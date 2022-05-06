@@ -45,7 +45,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9;
+  z-index: 100;
   overflow-x: hidden;
   overflow-y: auto;
   &__backdrop {
@@ -55,18 +55,18 @@ export default {
     bottom: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1;
+    z-index: 60;
   }
   &__dialog {
     position: relative;
-    width: 85vw;
+    width: 200px;
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 4px 3px 7px 2px #00000040;
-    margin: 25vh auto;
+    margin: 100px auto;
     display: flex;
     flex-direction: column;
-    z-index: 2;
+    z-index: 60;
     padding: 2rem;
     box-sizing: content-box;
   }

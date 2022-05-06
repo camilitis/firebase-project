@@ -5,6 +5,20 @@
   --task-dropshadow: #b9b9bb36;
 }
 
+.menu-edit{
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background-color: var(--content-section);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 20px rgba(#404040, 0.15);
+
+  padding: 5px;
+  &-show{
+    display: block;
+  }
+}
+
 .projects-section {
   overflow-y: auto;
   overflow-x: hidden;
@@ -90,7 +104,7 @@
     left: 50%;
     transform: translateY(-50%);
   }
-  
+
   @media screen and (max-width: 980px) {
     .project-boxes.jsGridView .project-box-wrapper {
       width: 50%;

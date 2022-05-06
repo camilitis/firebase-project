@@ -33,11 +33,11 @@
   }
 }
 
-.dropdown {
+.dropdown{
   position: relative;
   display: inline-block;
 }
-.dropdown-content {
+.dropdown-content{
   display: none;
   position: absolute;
   right: 0px;
@@ -50,4 +50,3 @@
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(#404040, 0.15);
 }
-.show {display: block;}
