@@ -82,13 +82,16 @@
           <div :id="'edittask-' + item.id" class="menu-edit">
             <input v-model="newtask" type="text" :placeholder="item.content">
             <button @click="toggleEditTask(item.id)" class="menu-button">Cancel</button>
-            <button @click="editTask(item.id, this.newtask);toggleEditTask(item.id)" class="menu-button">Save</button>
+            <button @click="editTask(item.id, this.newtask)" class="menu-button">Save</button>
           </div>
 
           <div :id="'editdate-' + item.id" class="menu-edit">
-            <input v-model="newdate" type="date" :placeholder="item.date">
+            <input v-model="newdate" v-if="!this.newnoduedate" :placeholder="item.date" :min="this.$store.state.todayMaxAttr" type="date">
+
+              <input v-model="this.newnoduedate" @change="this.newdate = ''" :placeholder="item.duedate" id="noduedate" type="checkbox">
+              <label for="noduedate">No due date</label>
             <button @click="toggleEditDate(item.id)" class="menu-button">Cancel</button>
-            <button @click="editDate(item.id, this.newdate);toggleEditDate(item.id)" class="menu-button">Save</button>
+            <button @click="editDate(item.id, this.newdate)" class="menu-button">Save</button>
           </div>
 
           <div :id="'editpriority-' + item.id" class="menu-edit">
@@ -99,7 +102,7 @@
               <option value="high">High</option>
             </select>
             <button @click="toggleEditPriority(item.id)" class="menu-button">Cancel</button>
-            <button @click="editPriorityrity(item.id, this.newpriority); toggleEditPriority(item.id)" class="menu-button">Save</button>
+            <button @click="editPriority(item.id, this.newpriority)" class="menu-button">Save</button>
           </div>
 
 
@@ -156,6 +159,7 @@ export default {
       newpriority: null,
       newtask: null,
       newdate: null,
+      newnoduedate: false,
     }
   },
   methods:{
@@ -245,15 +249,19 @@ export default {
         alert('Please write a task')
       }else{
         update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { content: newtask })
+        this.toggleEditTask(id)
         this.newtask = null
       }
     },
     editDate(id, newdate){
-      if(newdate == null){
+      if(newdate == '' && this.newnoduedate == false){
         alert('Please select a new date')
       }else{
+        console.log(this.newdate)
         update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { duedate: newdate })
+        this.toggleEditDate(id)
         this.newdate = null
+        this.newnoduedate= false
       }
     },
     editPriority(id, priority){
@@ -261,6 +269,7 @@ export default {
         alert('Please select a priority')
       }else{
         update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { priority: priority })
+        this.toggleEditPriority(id)
         this.newpriority = null
       }
     },
