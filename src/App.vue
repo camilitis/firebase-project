@@ -43,22 +43,6 @@
     v-if="addtaskopen == true"
     @click="toggleaddtask" class="app-backdrop">
   </div>
-
-<!-- 
-          <section>
-            <label for="priority">Modify priority:</label>
-            <select id="priority" v-model="newpriority" name="priority">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-            <a href="#open-taskoptionsmodal">Cancel</a>
-            <button @click="updatePriority(item.id, this.newpriority)">Save</button>
-          </section> -->
-
-      <!-- updatePriority(id, priority){
-      update(ref(db, 'users/' + this.userID + '/tasks/' + id), { priority: priority })
-    } -->
 </template>
 <script>
 import { getAuth, signOut } from 'firebase/auth'

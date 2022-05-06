@@ -8,11 +8,10 @@
 .menu-edit{
   display: none;
   position: absolute;
-  z-index: 10;
+  z-index: 100;
   background-color: var(--content-section);
   border-radius: var(--border-radius);
   box-shadow: 0 10px 20px rgba(#404040, 0.15);
-
   padding: 5px;
   &-show{
     display: block;

@@ -30,9 +30,9 @@
               <ul class="menu-list">
                 <li class="menu-item"><button class="menu-button"><vue-feather type="edit"></vue-feather>Edit<vue-feather type="chevron-right"></vue-feather></button>
                   <ul class="menu-sub-list">
-                    <li @click="openEditTask(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
-                    <li @click="openEditDate(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
-                    <li @click="openEditPriority(item.id)" class="menu-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
+                    <li @click="toggleEditTask(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
+                    <li @click="toggleEditDate(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
+                    <li @click="toggleEditPriority(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
                   </ul>
                 </li>
               </ul>
@@ -80,15 +80,26 @@
 
 
           <div :id="'edittask-' + item.id" class="menu-edit">
-            AAAA
+            <input v-model="newtask" type="text" :placeholder="item.content">
+            <button @click="toggleEditTask(item.id)" class="menu-button">Cancel</button>
+            <button @click="editTask(item.id, this.newtask);toggleEditTask(item.id)" class="menu-button">Save</button>
           </div>
 
           <div :id="'editdate-' + item.id" class="menu-edit">
-            BBBB
+            <input v-model="newdate" type="date" :placeholder="item.date">
+            <button @click="toggleEditDate(item.id)" class="menu-button">Cancel</button>
+            <button @click="editDate(item.id, this.newdate);toggleEditDate(item.id)" class="menu-button">Save</button>
           </div>
 
           <div :id="'editpriority-' + item.id" class="menu-edit">
-            CCCC
+            <label for="priority">Modify priority:</label>
+            <select id="priority" v-model="newpriority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+            <button @click="toggleEditPriority(item.id)" class="menu-button">Cancel</button>
+            <button @click="editPriorityrity(item.id, this.newpriority); toggleEditPriority(item.id)" class="menu-button">Save</button>
           </div>
 
 
@@ -122,7 +133,7 @@
 
   <div 
     v-if="this.menuactive !== null"
-    @click="hidemenu" class="app-backdrop"></div>
+    @click="this.menuactive = null" class="app-backdrop"></div>
 
 </template>
 <script>
@@ -139,7 +150,12 @@ export default {
       notdonetasks: [],
 
       dataMessage: '',
-      menuactive: null
+      menuactive: null,
+
+      editmenu: null,
+      newpriority: null,
+      newtask: null,
+      newdate: null,
     }
   },
   methods:{
@@ -169,13 +185,13 @@ export default {
       })
     },
 
-    openEditTask(id){
+    toggleEditTask(id){
       document.getElementById('edittask-' + id).classList.toggle('menu-edit-show')
     },
-    openEditDate(id){
+    toggleEditDate(id){
       document.getElementById('editdate-' + id).classList.toggle('menu-edit-show')
     },
-    openEditPriority(id){
+    toggleEditPriority(id){
       document.getElementById('editpriority-' + id).classList.toggle('menu-edit-show')
     },
 
@@ -189,10 +205,6 @@ export default {
 
     settoinprogress(id){
       update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { done: 'progress' })
-    },
-
-    hidemenu(){
-      this.menuactive = null
     },
 
     duedatecountdown(duedate){
@@ -227,11 +239,31 @@ export default {
         this.menuactive = id
       }
     },
-    hideMenu(){
-      if(this.menuactive != null){
-        this.menuactive = null
+
+    editTask(id, newtask){
+      if(newtask == null){
+        alert('Please write a task')
+      }else{
+        update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { content: newtask })
+        this.newtask = null
       }
-    }
+    },
+    editDate(id, newdate){
+      if(newdate == null){
+        alert('Please select a new date')
+      }else{
+        update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { duedate: newdate })
+        this.newdate = null
+      }
+    },
+    editPriority(id, priority){
+      if(priority == null){
+        alert('Please select a priority')
+      }else{
+        update(ref(db, 'users/' + this.$store.state.userid + '/tasks/' + id), { priority: priority })
+        this.newpriority = null
+      }
+    },
   },
   created(){
     this.showData()
