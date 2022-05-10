@@ -3,7 +3,7 @@ import signIn from '../views/SignIn.vue'
 import signUp from '../views/SignUp.vue'
 import TasksList from '../views/TasksList.vue'
 import wishList from '../views/WishList.vue'
-import ProfileMenu from '../views/ProfileMenu.vue'
+import settingsMenu from '../views/settingsMenu.vue'
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -32,9 +32,9 @@ const routes = [
     component: wishList
   },
   {
-    path: '/profile',
-    name: 'profileMenu',
-    component: ProfileMenu
+    path: '/settings',
+    name: 'Settings',
+    component: settingsMenu
   }
 ]
 

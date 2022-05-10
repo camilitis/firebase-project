@@ -23,22 +23,12 @@ export default createStore({
   mutations: {
     setUser(){
       const auth = getAuth()
-      const userinfo = []
 
       onAuthStateChanged(auth, (user) => {
         if(user){
           this.state.islogged = true
           this.state.userid = user.uid
 
-          const colRef = ref(db, 'users/' + this.state.userid)
-
-          onValue(colRef, (snapshot) => {
-            snapshot.forEach((element) => {
-              userinfo.push({ info: element.key, value: element.val() })
-            })
-            let username = userinfo.find(user => user.info === 'username')
-            this.state.username = username.value
-          })
           onValue(ref(db, 'users/' + this.state.userid + '/darkmode'), (snapshot) => {
             if(snapshot.val() === true){
               document.documentElement.classList.add('dark')
@@ -52,7 +42,20 @@ export default createStore({
           this.state.islogged = false
         }
       })
-    }
+    },
+
+    setuserinfo(){
+      const userinfo = []
+      const colRef = ref(db, 'users/' + this.state.userid)
+
+      onValue(colRef, (snapshot) => {
+        snapshot.forEach((element) => {
+          userinfo.push({ info: element.key, value: element.val() })
+        })
+        let username = userinfo.find(user => user.info === 'username')
+        this.state.username = username.value
+      })
+    },
   },
   actions: {
     signInWithGoogle({commit}){
@@ -106,6 +109,10 @@ export default createStore({
       this.state.todaysdate = day + ', ' + month + ' ' + today.getDate()
 
       this.state.taskdate = month + ', ' + today.getDate()
+    },
+
+    setprofilepic(downloadURL){
+      console.log(downloadURL)
     }
   }
 })

@@ -173,6 +173,27 @@ html, body {
   color: var(--secondary-color);
 }
 
+.btn{
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  background-color: var(--selected-color);
+  border: none;
+  color: var(--bg-color);
+  &:hover{
+    background-color: var(--selected-hover-color)
+  }
+}
+.cancel-btn{
+  background-color: var(--high-border-color);
+  &:hover{
+    background-color: var(--high-bg-color);
+  }
+}
+
 .high { 
   background-color: var(--high-bg-color);
   border: 3px solid  var(--high-border-color)}

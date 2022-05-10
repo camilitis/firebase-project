@@ -21,14 +21,14 @@
     <nav class="sidebar">
       <router-link to="/"><vue-feather type="calendar"></vue-feather>My projects</router-link>
       <router-link to="/wishlist"><vue-feather type="edit-3"></vue-feather>Wish list</router-link>
-      <router-link to="/profile"><vue-feather type="settings"></vue-feather>Settings</router-link>
+      <router-link to="/settings"><vue-feather type="settings"></vue-feather>Settings</router-link>
       <span @click="logout"><vue-feather type="log-out"></vue-feather>Logout</span>
     </nav>
     <div class="content">
       <div class="projects-section-header">
         <p v-if="this.$route.path == '/'">My projects</p>
         <p v-else-if="this.$route.path == '/wishlist'">Wish List</p>
-        <p v-else-if="this.$route.path == '/profile'">Settings</p>
+        <p v-else-if="this.$route.path == '/settings'">Settings</p>
         <h3>{{this.$store.state.todaysdate}}</h3>
       </div>
       <router-view/>
@@ -97,6 +97,12 @@ export default{
     auth = getAuth()
     this.$store.commit('setUser')
     this.$store.dispatch('getdate')
+  },
+
+  updated(){
+    if(this.$store.state.userid){
+      this.$store.commit('setuserinfo')
+    }
   }
 }
 </script>
