@@ -9,7 +9,7 @@
         <vue-feather 
           v-if="this.$store.state.userid"
           @click="toggleaddtask"
-          class="addTask-button" id="addtaskbutton" type="plus"></vue-feather>
+          class="addtask-button" id="addtaskbutton" type="plus"></vue-feather>
         <div id="myDropdown" class="dropdown-content">
           <AddPost/>
         </div>
@@ -19,16 +19,16 @@
 
   <section v-if="this.$store.state.userid" class="app">
     <nav class="sidebar">
-      <router-link to="/"><vue-feather type="calendar"></vue-feather>My projects</router-link>
-      <router-link to="/wishlist"><vue-feather type="edit-3"></vue-feather>Wish list</router-link>
-      <router-link to="/settings"><vue-feather type="settings"></vue-feather>Settings</router-link>
-      <span @click="logout"><vue-feather type="log-out"></vue-feather>Logout</span>
+      <router-link to="/"><vue-feather type="calendar"></vue-feather><p class="sidebar-text">My projects</p></router-link>
+      <router-link to="/wishlist"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></router-link>
+      <router-link to="/settings"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></router-link>
+      <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
     </nav>
     <div class="content">
       <div class="projects-section-header">
-        <p v-if="this.$route.path == '/'">My projects</p>
-        <p v-else-if="this.$route.path == '/wishlist'">Wish List</p>
-        <p v-else-if="this.$route.path == '/settings'">Settings</p>
+        <p v-if="this.$route.path == '/'" class="section-title">My projects</p>
+        <p v-else-if="this.$route.path == '/wishlist'" class="section-title">Wish List</p>
+        <p v-else-if="this.$route.path == '/settings'" class="section-title">Settings</p>
         <h3>{{this.$store.state.todaysdate}}</h3>
       </div>
       <router-view/>
@@ -40,7 +40,7 @@
   </section>
 
   <div 
-    v-if="addtaskopen == true"
+    v-if="this.addtaskopen == true"
     @click="toggleaddtask" class="app-backdrop">
   </div>
 </template>
@@ -84,13 +84,10 @@ export default{
       }
     },
     toggleaddtask(){
+      this.addtaskopen = !this.addtaskopen
+
       document.getElementById('myDropdown').classList.toggle('show')
-      document.getElementById('addtaskbutton').classList.toggle('addTask-button-clicked')
-      if(this.addtaskopen == true){
-        this.addtaskopen = false
-      }else{
-        this.addtaskopen = true
-      }
+      document.getElementById('addtaskbutton').classList.toggle('addtask-button-clicked')
     },
   },
   beforeCreate(){

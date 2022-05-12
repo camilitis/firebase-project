@@ -109,10 +109,6 @@ export default createStore({
       this.state.todaysdate = day + ', ' + month + ' ' + today.getDate()
 
       this.state.taskdate = month + ', ' + today.getDate()
-    },
-
-    setprofilepic(downloadURL){
-      console.log(downloadURL)
     }
   }
 })

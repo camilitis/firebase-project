@@ -23,13 +23,13 @@
     <h4>Password</h4>
     <button disabled>Change password</button>
 
-    <!-- <h2>Workspace settings</h2>
+    <h2>Workspace settings</h2>
 
-    <hr>
+    <!-- <hr> -->
 
-    <h4>Name:</h4>
-    <input :placeholder="this.$store.state.workspaceName">  -->
-    <!-- Crear this.workspace -->
+    <!-- <h4>Name:</h4>
+    <input :placeholder="this.$store.state.workspaceName"> 
+    Crear this.workspace -->
 
     <span class="settings-btn">
     <button @click="updatenewsettings" class="btn">Update</button>
@@ -93,7 +93,7 @@ export default {
 
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             this.imageUrl = downloadURL
-            this.$store.dispatch('setprofilepic', downloadURL)
+            console.log(downloadURL)
           })
       }),
       (error) => {
@@ -106,23 +106,5 @@ export default {
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
 @import '@/styles/LogStyle.scss';
-
-.settings {
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-
-  &-btn{
-    display: flex;
-    margin: 10px;
-  }
-
-  input, button{
-    width: 300px;
-  }
-}
-
-hr{
-  width: 100%;
-}
+@import '@/styles/SettingsStyle.scss';
 </style>

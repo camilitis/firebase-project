@@ -30,9 +30,9 @@
               <ul class="menu-list">
                 <li class="menu-item"><button class="menu-button"><vue-feather type="edit"></vue-feather>Edit<vue-feather type="chevron-right"></vue-feather></button>
                   <ul class="menu-sub-list">
-                    <li @click="toggleEditTask(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
-                    <li @click="toggleEditDate(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
-                    <li @click="toggleEditPriority(item.id); this.menuactive = null" class="menu-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
+                    <li @click="toggleEditTask(item.id); this.menuactive = null" class="menu-item menu-sub-item"><button class="menu-button"><vue-feather type="italic"></vue-feather>Task</button></li>
+                    <li @click="toggleEditDate(item.id); this.menuactive = null" class="menu-item menu-sub-item"><button class="menu-button"><vue-feather type="calendar"></vue-feather>Date</button></li>
+                    <li @click="toggleEditPriority(item.id); this.menuactive = null" class="menu-item menu-sub-item"><button class="menu-button"><vue-feather type="triangle"></vue-feather>Priority</button></li>
                   </ul>
                 </li>
               </ul>
@@ -49,21 +49,21 @@
                     </vue-feather>
                         <span v-if="item.done == true">Done</span>
                         <span v-else-if="item.done == false">Not done</span>
-                        <span v-if="item.done == 'progress'">In progress</span>
+                        <span v-else-if="item.done == 'progress'">In progress</span>
                     <vue-feather type="chevron-right"></vue-feather>
                   </button>
                   <ul class="menu-sub-list">
-                    <li class="menu-item">
+                    <li class="menu-item menu-sub-item">
                       <button @click="settoinprogress(item.id)" class="menu-button">
                         In progress
                         <vue-feather v-if="item.done === 'progress'" class="menu-svg-progress" type="check"></vue-feather>
                       </button></li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-sub-item">
                       <button @click="settodone(item.id)" class="menu-button">
                         Done
                         <vue-feather v-if="item.done === true" class="checkcircle" type="check"></vue-feather>
                       </button></li>
-                    <li class="menu-item">
+                    <li class="menu-item menu-sub-item">
                       <button @click="settonotdone(item.id)" class="menu-button">
                         Not done
                         <vue-feather v-if="item.done === false" class="menu-svg-notdone" type="check"></vue-feather>
@@ -81,8 +81,14 @@
 
           <div :id="'edittask-' + item.id" class="menu-edit">
             <input v-model="newtask" type="text" :placeholder="item.content">
-            <button @click="toggleEditTask(item.id)" class="menu-button">Cancel</button>
-            <button @click="editTask(item.id, this.newtask)" class="menu-button">Save</button>
+            <button @click="toggleEditTask(item.id)" class="menu-button">
+              <vue-feather type="x"></vue-feather>
+              Cancel
+            </button>
+            <button @click="editTask(item.id, this.newtask)" class="menu-button">
+              <vue-feather type="check"></vue-feather>
+              Save
+            </button>
           </div>
 
           <div :id="'editdate-' + item.id" class="menu-edit">
@@ -90,8 +96,14 @@
 
               <input v-model="this.newnoduedate" @change="this.newdate = ''" :placeholder="item.duedate" id="noduedate" type="checkbox">
               <label for="noduedate">No due date</label>
-            <button @click="toggleEditDate(item.id)" class="menu-button">Cancel</button>
-            <button @click="editDate(item.id, this.newdate)" class="menu-button">Save</button>
+            <button @click="toggleEditDate(item.id)" class="menu-button">
+              <vue-feather type="x"></vue-feather>
+              Cancel
+            </button>
+            <button @click="editDate(item.id, this.newdate)" class="menu-button">
+              <vue-feather type="check"></vue-feather>
+              Save
+            </button>
           </div>
 
           <div :id="'editpriority-' + item.id" class="menu-edit">
@@ -101,8 +113,14 @@
               <option value="medium">Medium</option>
               <option value="high">High</option>
             </select>
-            <button @click="toggleEditPriority(item.id)" class="menu-button">Cancel</button>
-            <button @click="editPriority(item.id, this.newpriority)" class="menu-button">Save</button>
+            <button @click="toggleEditPriority(item.id)" class="menu-button">
+              <vue-feather type="x"></vue-feather>
+              Cancel
+            </button>
+            <button @click="editPriority(item.id, this.newpriority)" class="menu-button">
+              <vue-feather type="check"></vue-feather>
+              Save
+            </button>
           </div>
 
 

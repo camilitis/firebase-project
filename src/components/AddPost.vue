@@ -1,35 +1,31 @@
 <template>
-  <div class="addTask-section">
-    <form class="addTask-form">
+  <div class="addtask">
+    <form class="addtask-form" @submit.prevent="">
       <label for="content">Add your new task:</label>
-      <input v-model="state.content" id="content" type="text" autocomplete="off">
+      <textarea v-model="state.content" id="content"></textarea>
 
-<hr>
+      <section class="addtask-info">
+        <div class="addtask-duedate">
+          <label for="duedate" class="addtask-info-header">Due date:</label>
+          <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
 
-      <div class="addTask-section-duedate">
-        <label for="duedate">Due date:</label>
-        <input v-model="duedate" v-if="!this.noduedate" id="duedate" type="date" :min="this.$store.state.todayMaxAttr">
+          <span class="addtask-noduedate">
+            <input v-model="this.noduedate" id="noduedate" type="checkbox">
+            <label for="noduedate">No due date</label>
+          </span>
+        </div>
 
-        <br>
+        <div class="addtask-priority">
+          <label for="priority" class="addtask-info-header">Priority:</label>
+          <select v-model="state.priority" id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </section>
 
-        <span>
-          <input v-model="this.noduedate" id="noduedate" type="checkbox">
-          <label for="noduedate">No due date</label>
-        </span>
-      </div>
-
-      <br>
-
-      <label for="priority">Priority:</label>
-      <select v-model="state.priority" id="priority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-
-      <br>
-
-      <p><a @click="addpost()" type="button" class="addTask-btn">Add Post</a></p>
+      <p><a @click="addpost()" type="button">Add Post</a></p>
     </form>
   </div>
 </template>
@@ -88,6 +84,8 @@ export default {
           this.duedate = ''
           this.v$.$reset()
         })
+      }else{
+        alert('Please fill in all the fields')
       }
     }
   }

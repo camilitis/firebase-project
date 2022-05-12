@@ -1,24 +1,17 @@
-.addTask{
-  &-button{
-    &:hover{
-      background-color: var(--selected-color);
-      border-radius: 10px;
-    }
-    &-clicked{
-      background-color: var(--selected-color);
-      border-radius: 10px;
-      &:hover{
-        background-color: var(--selected-hover-color);
-      }
-    }
-  }
+.addtask{
+  display: flex;
 
-  &-section{
-    padding: 10px;
+
+  &-noduedate{
     display: flex;
+    margin: 0;
+    padding: 0;
+    input, label{
+      width: auto;
+    }
   }
 
-  &-btn{
+  a[type=button]{
     font-weight: bold;
     cursor: pointer;
     color: whitesmoke;
@@ -30,6 +23,41 @@
     &:hover{
       background-color: var(--selected-hover-color)
     }
+  }
+
+  &-form{
+    textarea{
+      border-radius: 8px;
+      padding: 4px;
+      height: auto;
+      resize: none;
+      font-size: 16px;
+      &:focus{
+        border: 2px solid var(--selected-color);
+        outline: none;
+        padding: 3px;
+      }
+    }
+  }
+
+  &-info{
+    input[type=date], select{
+      border-radius: 8px;
+      padding: 2px;
+      margin: 8px;
+      width: auto;
+      text-align: center;
+    }
+
+    &-header{
+      border-bottom: 2px solid #ddd;
+    }
+  }
+
+  input+section{
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+    width: 100%;
   }
 }
 

@@ -5,19 +5,6 @@
   --task-dropshadow: #b9b9bb36;
 }
 
-.menu-edit{
-  display: none;
-  position: absolute;
-  z-index: 100;
-  background-color: var(--content-section);
-  border-radius: var(--border-radius);
-  box-shadow: 0 10px 20px rgba(#404040, 0.15);
-  padding: 5px;
-  &-show{
-    display: block;
-  }
-}
-
 .projects-section {
   overflow-y: auto;
   overflow-x: hidden;
@@ -113,18 +100,14 @@
   @media screen and (max-width: 520px) {
     .projects-section { overflow: auto; }
     .project-boxes { overflow-y: visible; }
-    .app-content { padding: 16px 12px 24px 12px;}
     .status-number, .status-type {
       font-size: 10px;
-    }
-    .app-header {
-      padding: 16px 10px;
     }
     .project-boxes.jsGridView .project-box-wrapper {
       width: 100%;
     }
     .projects-section {
-      padding: 24px 16px 0 16px;
+      padding: 0 10px;
     }
     .projects-section-header p,
     .projects-section-header .time{

@@ -20,6 +20,13 @@
     align-self: center;
     margin: 0 auto;
   }
+
+  input[type=text], input[type=date], input[type=radio], input[type=password], select{
+    border-radius: var(--border-radius);
+    padding: 13px;
+    margin: 10px;
+    width: 250px;
+  }
 }
 
 .register-btn{
@@ -113,7 +120,7 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .log{
     justify-content: center;
     svg{

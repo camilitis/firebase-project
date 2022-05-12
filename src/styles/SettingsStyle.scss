@@ -1,0 +1,45 @@
+.settings {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+
+  &-btn{
+    display: flex;
+    margin: 10px;
+    width: 50%;
+    justify-content: space-around;
+  }
+
+  hr{
+    width: 100%;
+    background-color: #ddd;
+  }
+
+  // input[type=file]{
+  //   width: auto;
+  // }
+}
+
+* {
+  scrollbar-color: var(--selected-color) var(--content-section);
+  }
+  *::-webkit-scrollbar {
+    width: 3px;
+  }
+  *::-webkit-scrollbar-track {
+    background: var(--content-section);
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--selected-color);
+    border-radius: 10px;
+  }
+
+@media screen and (max-width: 450px) {
+  .settings {
+
+    &-btn{
+      width: auto;
+    }
+  }
+}
