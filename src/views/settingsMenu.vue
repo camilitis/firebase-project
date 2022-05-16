@@ -4,7 +4,7 @@
 
     <hr>
 
-    <img :src="imageUrl" style="height: 100px; width: 100px; border-radius: 50%;">
+    <img :src="this.$store.state.profilepicture" style="height: 100px; width: 100px; border-radius: 50%;">
     <input type="file" @change="uploadImage">
     <p>{{this.uploadingprogress}}</p>
 
@@ -54,25 +54,21 @@ export default {
   },
   methods: {
     updatenewsettings(){
-      if(this.newusername){
         update(ref(db, 'users/' + this.$store.state.userid), { username: this.newusername })
+        update(ref(db, 'users/' + this.$store.state.userid), { profilepicture: this.profilepicture })
+
         this.newusername = null
+        this.imageUrl = null
         alert('Settings updated')
-      }else if(this.newusername == null || this.newusername == ''){
-        alert('Please enter a new username') //Dynamically add error message
-      }
 
       this.$store.commit('setuserinfo')
     },
 
     cancelupdatesettings(){
       this.newusername = null
+      this.downloadURL = null
     },
 
-
-    firstProfilePicture(){
-      this.uploadImage('@/assets/profile.jpg')
-    },
     uploadImage(e){
       var files = e.target.files || e.dataTransfer.files
       if (!files.length){
@@ -93,7 +89,6 @@ export default {
 
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             this.imageUrl = downloadURL
-            console.log(downloadURL)
           })
       }),
       (error) => {

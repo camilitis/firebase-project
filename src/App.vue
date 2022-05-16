@@ -20,8 +20,8 @@
   <section v-if="this.$store.state.userid" class="app">
     <nav class="sidebar">
       <router-link to="/"><vue-feather type="calendar"></vue-feather><p class="sidebar-text">My projects</p></router-link>
-      <router-link to="/wishlist"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></router-link>
-      <router-link to="/settings"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></router-link>
+      <span to="/" style="cursor: not-allowed;"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></span>
+      <span to="/" style="cursor: not-allowed;"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></span>
       <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
     </nav>
     <div class="content">

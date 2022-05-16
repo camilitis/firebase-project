@@ -11,6 +11,7 @@ export default createStore({
     islogged: false,
     userid: null,
     username: '',
+    profilepicture: '',
 
     todayMaxAttr: '',
     todaysdate: '',
@@ -52,8 +53,13 @@ export default createStore({
         snapshot.forEach((element) => {
           userinfo.push({ info: element.key, value: element.val() })
         })
-        let username = userinfo.find(user => user.info === 'username')
+        let username = userinfo.find(user => user.info == 'username')
         this.state.username = username.value
+
+        let profilepicture = userinfo.find(user => user.info == 'profilepicture')
+        this.state.profilepicture = profilepicture.value
+
+        console.log('si senioar')
       })
     },
   },

@@ -1,7 +1,6 @@
 .addtask{
   display: flex;
 
-
   &-noduedate{
     display: flex;
     margin: 0;
@@ -32,6 +31,8 @@
       height: auto;
       resize: none;
       font-size: 16px;
+      background-color: var(--content-section);
+      color: var(--text-color);
       &:focus{
         border: 2px solid var(--selected-color);
         outline: none;
