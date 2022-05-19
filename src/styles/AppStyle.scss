@@ -9,14 +9,15 @@ html, body {
   padding: 0;
   font-family: "Inter", sans-serif;
   background-color: var(--bg-color);
+  font-smooth: always;
   li{
     list-style: none;
   }
 }
 #app{
   transition: .2s;
-  padding: 0 20px;
-  color: var(--text-color)
+  padding: 20px;
+  color: var(--text-color);
 }
 :root{
   --bg-color: #F2F2F2;
@@ -52,32 +53,8 @@ html, body {
 
 .show {display: block;}
 
-.header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &-right{
-    display: flex;
-    justify-content: space-between;
-    width: 50px;
-  }
-}
 .addtask-button, .moon{
   cursor: pointer;
-}
-.addtask-button{
-  &:hover{
-    background-color: var(--selected-color);
-    border-radius: 10px;
-  }
-  &-clicked{
-    background-color: var(--selected-color);
-    border-radius: 10px;
-    &:hover{
-      background-color: var(--selected-hover-color);
-    }
-  }
 }
 
 .app{
@@ -134,10 +111,10 @@ html, body {
 }
 
 .content{
-  height: 90vh;
+  height: 95vh;
   background-color: var(--content-section);
   border-radius: var(--border-radius);
-  padding: 30px 30px 0 30px;
+  padding: 30px 30px 30px 30px; //!
   overflow: hidden;
   width: auto;
   display: flex;
@@ -158,38 +135,6 @@ html, body {
     margin: 0;
     color: var(--main-color);
   }
-}
-
-.projects-status {
-  display: flex;
-}
-.item-status {
-  display: flex;
-  flex-direction: column;
-  margin-right: 16px;
-  
-  &:not(:last-child) .status-type:after {
-    content: '';
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translatey(-50%);
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    border: 1px solid var(--secondary-color);
-  }
-}
-.status-number {
-  font-size: 24px;
-  line-height: 32px;
-  font-weight: 700;
-  color: var(--main-color);
-}
-.status-type {
-  position: relative;
-  padding-right: 24px;
-  color: var(--secondary-color);
 }
 
 .btn{
@@ -254,9 +199,6 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
   }
   .content{
     padding: 15px;
-  }
-  .section-title{
-    display: none;
   }
   .sidebar{
     width: auto;

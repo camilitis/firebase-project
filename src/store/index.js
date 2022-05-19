@@ -6,6 +6,9 @@ import db from '@/main.js'
 
 export default createStore({
   state: {
+    time: null,
+    hours: null,
+
     errorMsg: '',
 
     islogged: false,
@@ -18,6 +21,11 @@ export default createStore({
     taskdate: '',
 
     numberOfTasks: null,
+
+    geoloaction:{
+      lat: null,
+      lng: null
+    }
   },
   getters: {
   },
@@ -58,8 +66,6 @@ export default createStore({
 
         let profilepicture = userinfo.find(user => user.info == 'profilepicture')
         this.state.profilepicture = profilepicture.value
-
-        console.log('si senioar')
       })
     },
   },
@@ -92,7 +98,6 @@ export default createStore({
 
     getdate(){
       var today = new Date()
-
       var dd = today.getDate()
       var mm = today.getMonth() + 1
       var yyyy = today.getFullYear()
@@ -115,6 +120,37 @@ export default createStore({
       this.state.todaysdate = day + ', ' + month + ' ' + today.getDate()
 
       this.state.taskdate = month + ', ' + today.getDate()
+    },
+
+    gethomedata(){
+      setInterval(() => {
+        var today = new Date()
+        var hours = today.getHours()
+        var minutes = today.getMinutes()
+        if(minutes < 10){
+          var time = hours + ':0' + minutes
+        }else{
+          time = hours + ":" + minutes
+        }
+
+        this.state.hours = hours
+        this.state.time = time
+      }, 1000)
+    },
+
+    getlocation(){
+      const successCallback = (position) =>{
+        this.state.geoloaction.lat = position.coords.latitude
+        this.state.geoloaction.lng = position.coords.longitude
+      }
+
+      const errorCallback = (error) =>{
+        console.log(error)
+      }
+
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback,{
+        enableHighAccuracy: true
+      })
     }
   }
 })

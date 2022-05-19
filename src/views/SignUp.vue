@@ -45,7 +45,7 @@
 
     <nav>
       Have an account already?
-      <router-link to="/signin" class="registration-link">Sign up</router-link>
+      <router-link to="/signin" class="registration-link">Sign in</router-link>
     </nav>
   </div>
 

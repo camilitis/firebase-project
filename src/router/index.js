@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import HomePage from '../views/HomePage.vue'
 import signIn from '../views/SignIn.vue'
 import signUp from '../views/SignUp.vue'
 import TasksList from '../views/TasksList.vue'
@@ -10,6 +11,14 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 const routes = [
   {
     path: '/',
+    name: 'Home',
+    component: HomePage,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/tasks',
     name: 'taskslist',
     component: TasksList,
     meta:{
@@ -29,12 +38,18 @@ const routes = [
   {
     path: '/wishlist',
     name: 'wishList',
-    component: wishList
+    component: wishList,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/settings',
     name: 'Settings',
-    component: settingsMenu
+    component: settingsMenu,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 

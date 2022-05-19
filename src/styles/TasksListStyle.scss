@@ -5,6 +5,10 @@
   --task-dropshadow: #b9b9bb36;
 }
 
+.projects-header{
+  display: flex;
+  justify-content: space-between;
+}
 .projects-section {
   overflow-y: auto;
   overflow-x: hidden;
@@ -28,7 +32,36 @@
       }
     }
   }
-  
+
+  .item-status {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+    
+    &:not(:last-child) .status-type:after {
+      content: '';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translatey(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1px solid var(--secondary-color);
+    }
+  }
+  .status-number {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: var(--main-color);
+  }
+  .status-type {
+    position: relative;
+    padding-right: 24px;
+    color: var(--secondary-color);
+  }
+
   .project-box {
     border-radius: var(--border-radius);
     padding: 16px;
@@ -89,6 +122,24 @@
     top: 50%;
     left: 50%;
     transform: translateY(-50%);
+  }
+
+  .addtask-button{
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 7px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    background-color: var(--selected-color);
+    &:hover{
+      background-color: var(--selected-hover-color);
+      border-radius: 10px;
+    }
+    &-clicked{
+      background-color: var(--selected-hover-color);
+      border-radius: 10px;
+    }
   }
 
   @media screen and (max-width: 980px) {

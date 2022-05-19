@@ -8,28 +8,6 @@
     <input type="file" @change="uploadImage">
     <p>{{this.uploadingprogress}}</p>
 
-    <hr>
-
-    <h4>Personal info</h4>
-    Email:
-    user123@users.com
-    <button disabled>Change email</button>
-
-    <h6>Preferred name</h6>
-    <input :placeholder="this.$store.state.username" v-model="this.newusername" type="text">
-
-    <hr>
-
-    <h4>Password</h4>
-    <button disabled>Change password</button>
-
-    <h2>Workspace settings</h2>
-
-    <!-- <hr> -->
-
-    <!-- <h4>Name:</h4>
-    <input :placeholder="this.$store.state.workspaceName"> 
-    Crear this.workspace -->
 
     <span class="settings-btn">
     <button @click="updatenewsettings" class="btn">Update</button>

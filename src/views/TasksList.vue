@@ -1,18 +1,34 @@
 <template>
+    <div class="projects-header">
+      <span class="projects-status">
+        <div class="item-status">
+          <span class="status-number">{{ this.notdonetasks.length }}</span>
+          <span class="status-type">In Progress</span>
+        </div>
+        <div class="item-status">
+          <span class="status-number">{{ this.donetasks.length }}</span>
+          <span class="status-type">Completed</span>
+        </div>
+        <div class="item-status">
+          <span class="status-number">{{ this.tasks.length }}</span>
+          <span class="status-type">Total Projects</span>
+        </div>
+      </span>
 
-    <div class="projects-status">
-      <div class="item-status">
-        <span class="status-number">{{ this.notdonetasks.length }}</span>
-        <span class="status-type">In Progress</span>
-      </div>
-      <div class="item-status">
-        <span class="status-number">{{ this.donetasks.length }}</span>
-        <span class="status-type">Completed</span>
-      </div>
-      <div class="item-status">
-        <span class="status-number">{{ this.tasks.length }}</span>
-        <span class="status-type">Total Projects</span>
-      </div>
+          <div class="dropdown">
+            <span 
+              v-if="this.$store.state.userid"
+              @click="toggleaddtask"
+              class="addtask-button" id="addtaskbutton"
+            >
+              <vue-feather type="plus"></vue-feather>
+              Add task
+            </span>
+            <div id="myDropdown" class="dropdown-content">
+              <AddPost/>
+            </div>
+          </div>
+
     </div>
 
     <div class="projects-section">
@@ -141,9 +157,10 @@
         <div class="project-box-footer">
           <div class="days-left">
             <span v-if="item.duedate == ''">No due date</span>
-            <span v-else>{{ this.duedatecountdown(item.duedate) }}</span>
+            <span v-else-if="this.duedatecountdown(item.duedate) < 1" style="color: red;">Ended</span>
+            <span v-else>{{ this.duedatecountdown(item.duedate) }}d</span>
           </div>
-          <div v-if="item.done == 'progress'" class="days-left">
+          <div v-if="item.done == 'progress' && this.duedatecountdown(item.duedate) >= 1" class="days-left">
             <span>In progress</span>
           </div>
         </div>
@@ -156,10 +173,16 @@
     v-if="this.menuactive !== null"
     @click="this.menuactive = null" class="app-backdrop"></div>
 
+  <div 
+    v-if="this.addtaskopen == true"
+    @click="toggleaddtask" class="app-backdrop">
+  </div>
+
 </template>
 <script>
 import { ref, onValue, update, remove } from "firebase/database"
 import db from '@/main.js'
+import AddPost from '@/components/AddPost.vue'
 
 export default {
   name: 'TasksList',
@@ -170,6 +193,8 @@ export default {
       donetasks: [],
       notdonetasks: [],
 
+      addtaskopen: false,
+
       dataMessage: '',
       menuactive: null,
 
@@ -179,6 +204,9 @@ export default {
       newdate: null,
       newnoduedate: false,
     }
+  },
+  components:{
+    AddPost,
   },
   methods:{
     showData(){
@@ -246,7 +274,7 @@ export default {
 
       // return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24))
 
-      return days + "d "
+      return days
     },
     deleteData(id){
       if(confirm('Are you sure you want to delete this task?')){
@@ -290,6 +318,13 @@ export default {
         this.toggleEditPriority(id)
         this.newpriority = null
       }
+    },
+
+    toggleaddtask(){
+      this.addtaskopen = !this.addtaskopen
+
+      document.getElementById('myDropdown').classList.toggle('show')
+      document.getElementById('addtaskbutton').classList.toggle('addtask-button-clicked')
     },
   },
   created(){

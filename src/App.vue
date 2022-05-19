@@ -1,66 +1,28 @@
 <template>
-  <section class="header">
-    <h2 v-if="this.$store.state.username" style="text-transform: uppercase">{{ this.$store.state.username }}'s to do list</h2>
-    <h2 v-else style="text-transform: uppercase;">Your to do list</h2>
-
-    <div class="header-right">
-      <vue-feather @click="togglemode" class="moon" type="moon"></vue-feather>
-      <div class="dropdown">
-        <vue-feather 
-          v-if="this.$store.state.userid"
-          @click="toggleaddtask"
-          class="addtask-button" id="addtaskbutton" type="plus"></vue-feather>
-        <div id="myDropdown" class="dropdown-content">
-          <AddPost/>
-        </div>
-      </div>
+  <section class="app">
+    <div v-if="this.$store.state.userid" class="sidebar">
+      <nav>
+        <vue-feather @click="togglemode" class="moon" type="moon"></vue-feather>
+        <router-link to="/"><vue-feather type="home"></vue-feather><p class="sidebar-text">My home</p></router-link>
+        <router-link to="/tasks"><vue-feather type="calendar"></vue-feather><p class="sidebar-text">My tasks</p></router-link>
+        <span to="/" style="cursor: not-allowed;"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></span>
+        <span to="/" style="cursor: not-allowed;"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></span>
+        <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
+      </nav>
     </div>
-  </section>
-
-  <section v-if="this.$store.state.userid" class="app">
-    <nav class="sidebar">
-      <router-link to="/"><vue-feather type="calendar"></vue-feather><p class="sidebar-text">My projects</p></router-link>
-      <span to="/" style="cursor: not-allowed;"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></span>
-      <span to="/" style="cursor: not-allowed;"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></span>
-      <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
-    </nav>
     <div class="content">
-      <div class="projects-section-header">
-        <p v-if="this.$route.path == '/'" class="section-title">My projects</p>
-        <p v-else-if="this.$route.path == '/wishlist'" class="section-title">Wish List</p>
-        <p v-else-if="this.$route.path == '/settings'" class="section-title">Settings</p>
-        <h3>{{this.$store.state.todaysdate}}</h3>
-      </div>
       <router-view/>
     </div>
   </section>
-
-  <section v-if="!this.$store.state.userid">
-    <router-view/>
-  </section>
-
-  <div 
-    v-if="this.addtaskopen == true"
-    @click="toggleaddtask" class="app-backdrop">
-  </div>
 </template>
 <script>
 import { getAuth, signOut } from 'firebase/auth'
 import { ref, update } from 'firebase/database'
 import db from '@/main.js'
-import AddPost from '@/components/AddPost.vue'
 
 let auth
 
 export default{
-  data(){
-    return {
-      addtaskopen: false,
-    }
-  },
-  components:{
-    AddPost,
-  },
   methods:{
     logout(){
       if(confirm('Are you sure you want to log out?')){
@@ -82,20 +44,17 @@ export default{
           darkmode: false
         })
       }
-    },
-    toggleaddtask(){
-      this.addtaskopen = !this.addtaskopen
-
-      document.getElementById('myDropdown').classList.toggle('show')
-      document.getElementById('addtaskbutton').classList.toggle('addtask-button-clicked')
-    },
+    }
   },
   beforeCreate(){
     auth = getAuth()
     this.$store.commit('setUser')
     this.$store.dispatch('getdate')
+    this.$store.dispatch('gethomedata')
   },
-
+  created(){
+    this.$store.dispatch('getlocation')
+  },
   updated(){
     if(this.$store.state.userid){
       this.$store.commit('setuserinfo')
