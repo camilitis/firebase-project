@@ -4,7 +4,7 @@ import signIn from '../views/SignIn.vue'
 import signUp from '../views/SignUp.vue'
 import TasksList from '../views/TasksList.vue'
 import wishList from '../views/WishList.vue'
-import settingsMenu from '../views/settingsMenu.vue'
+import SettingsMenu from '../views/SettingsMenu.vue'
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -46,7 +46,7 @@ const routes = [
   {
     path: '/settings',
     name: 'Settings',
-    component: settingsMenu,
+    component: SettingsMenu,
     meta: {
       requiresAuth: true
     }
