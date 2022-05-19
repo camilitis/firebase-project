@@ -32,6 +32,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo $VUE_APP_API_KEY
+          echo $VUE_APP_API_KEY > .env
         env:
           VUE_APP_API_KEY: ${{secrets.VUE_APP_API_KEY}}
