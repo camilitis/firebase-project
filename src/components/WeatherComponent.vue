@@ -152,7 +152,7 @@ export default {
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
 @import '@/styles/TasksListStyle.scss';
-@import '@/styles/menuStyle.scss';
+@import '@/styles/MenuStyle.scss';
 
 input[type=text], input[type=date], input[type=radio], input[type=password], select{
   border-radius: 10px;
