@@ -4,7 +4,7 @@ import signIn from '../views/SignIn.vue'
 import signUp from '../views/SignUp.vue'
 import TasksList from '../views/TasksList.vue'
 import wishList from '../views/WishList.vue'
-import SettingsMenu from '../views/SettingsMenu.vue'
+import SettingsMenu from '../views/settingsMenu.vue'
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
