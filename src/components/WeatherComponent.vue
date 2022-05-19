@@ -20,7 +20,9 @@ export default {
   },
   methods: {
     getWeather: async function (){
-      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geoloaction.lat}&lon=${this.$store.state.geoloaction.lng}&appid=e53d6425e95a76246a55ea9fd70cf3a1&units=metric`
+      const VUE_APP_API_KEY = process.env.VUE_APP_API_KEY
+
+      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geoloaction.lat}&lon=${this.$store.state.geoloaction.lng}&appid=${VUE_APP_API_KEY}&units=metric`
 
       try{
         const response = await fetch(latURL)

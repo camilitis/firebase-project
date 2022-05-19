@@ -1,10 +1,8 @@
 <template>
   <div class="settings">
     <h2>My account</h2>
-
     <hr>
-
-    <img :src="this.$store.state.profilepicture" style="height: 100px; width: 100px; border-radius: 50%;">
+    <!-- <img :src="this.$store.state.profilepicture" style="height: 100px; width: 100px; border-radius: 50%;">
     <input type="file" @change="uploadImage">
     <p>{{this.uploadingprogress}}</p>
 
@@ -12,7 +10,7 @@
     <span class="settings-btn">
     <button @click="updatenewsettings" class="btn">Update</button>
     <button @click="cancelupdatesettings" class="cancel-btn btn">Cancel</button>
-    </span>
+    </span> -->
   </div>
 </template>
 <script>
@@ -80,4 +78,23 @@ export default {
 @import '@/styles/AppStyle.scss';
 @import '@/styles/LogStyle.scss';
 @import '@/styles/SettingsStyle.scss';
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: #777;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
 </style>
