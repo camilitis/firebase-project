@@ -174,8 +174,8 @@
         <div class="project-box-footer">
           <div class="days-left">
             <span v-if="item.duedate == ''">No due date</span>
-            <span v-else-if="this.duedatecountdown(item.duedate) < 1" style="color: red;">Ended</span>
-            <span v-else>{{ this.duedatecountdown(item.duedate) }}d</span>
+            <span v-else-if="this.duedatecountdown(item.duedate) == 'Ended'" style="color: red;">Ended</span>
+            <span v-else>{{ this.duedatecountdown(item.duedate) }}</span>
           </div>
           <div v-if="item.done == 'progress' && this.duedatecountdown(item.duedate) >= 1" class="days-left">
             <span>In progress</span>
@@ -269,22 +269,24 @@ export default {
 
     duedatecountdown(duedate){
       var dt1 = new Date().getTime()
-      var dt2 = new Date(duedate).setHours(0,0,0,0)
+
+      var dt2 = new Date(duedate)
+      const numbOfHours = 3
+      dt2.setTime(dt2.getTime() + numbOfHours * 60 * 60 * 1000)
 
       var distance = dt2 - dt1
 
       var days = Math.floor(distance / (1000 * 60 * 60 * 24))
-      // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-      // var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
 
-
-      //var dt1 = new Date()
-      // var dt2 = new Date(toDate)
-
-      // return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24))
-
-      return days
+      if(days < 0 && hours < 0 && minutes < 0){
+        return 'Ended'
+      }else if(days == 0){
+        return 'Tomorrow'
+      }else{
+      return days + 'd'
+      }
     },
     deleteData(id){
       if(confirm('Are you sure you want to delete this task?')){

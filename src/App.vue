@@ -64,7 +64,6 @@ export default{
 }
 //TODO: => when location is denied and 'get current' ask for permission
 //TODO => add 'get current' button
-//TODO: => fix days to due date
 </script>
 <style lang="scss">
 @import '@/styles/AppStyle.scss';
