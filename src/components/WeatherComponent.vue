@@ -16,7 +16,7 @@
             </button>
           </li>
         </ul>
-        <ul class="menu-list">
+        <ul v-if="this.locationtype == 'city'" class="menu-list">
           <li class="menu-item">
             <button @click="getWeather" class="menu-button">
               <vue-feather type="map-pin"></vue-feather>
@@ -65,7 +65,7 @@ export default {
 
       const VUE_APP_API_KEY = process.env.VUE_APP_API_KEY
 
-      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geoloaction.lat}&lon=${this.$store.state.geoloaction.lng}&appid=${VUE_APP_API_KEY}&units=metric`
+      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geolocation.lat}&lon=${this.$store.state.geolocation.lng}&appid=${VUE_APP_API_KEY}&units=metric`
 
       if(this.locationtype == 'lonlat'){
         try{
@@ -159,7 +159,7 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
 }
 
 .weather-card{
-  width: 350px;
+  max-width: 350px;
   border: 3px solid var(--text-color);
   border-radius: 10px;
   height: 150px;
@@ -207,11 +207,6 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
 }
 .clear-night{
   background-image: url("https://images.unsplash.com/photo-1506863250276-e0b65a47fed1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
-}
-
-input[type=text]{
-  padding: 6px 4px;
-  margin: 6px 2px;
 }
 
 .menu-weather{

@@ -22,7 +22,7 @@
               class="addtask-button" id="addtaskbutton"
             >
               <vue-feather type="plus"></vue-feather>
-              Add task
+              <span class="addtask-text">Add task</span>
             </span>
             <div id="myDropdown" class="dropdown-content">
               <AddPost/>
@@ -94,51 +94,68 @@
           </div>
           <!-- MENU -->
 
-
-          <div :id="'edittask-' + item.id" class="menu-edit">
-            <input v-model="newtask" type="text" :placeholder="item.content">
-            <button @click="toggleEditTask(item.id)" class="menu-button">
-              <vue-feather type="x"></vue-feather>
-              Cancel
-            </button>
-            <button @click="editTask(item.id, this.newtask)" class="menu-button">
-              <vue-feather type="check"></vue-feather>
-              Save
-            </button>
+          <div :id="'edittask-' + item.id" class="menu-container menu-edit">
+              <div class="menu">
+                <ul class="menu-list">
+                  <li class="menu-item">
+                    <input v-model="newtask" type="text" :placeholder="item.content">
+                    <button @click="toggleEditTask(item.id)" class="menu-button">
+                      <vue-feather type="x"></vue-feather>
+                      Cancel
+                    </button>
+                    <button @click="editTask(item.id, this.newtask)" class="menu-button">
+                      <vue-feather type="check"></vue-feather>
+                      Save
+                    </button>
+                  </li>
+                </ul>
+              </div>
           </div>
 
-          <div :id="'editdate-' + item.id" class="menu-edit">
-            <input v-model="newdate" v-if="!this.newnoduedate" :placeholder="item.date" :min="this.$store.state.todayMaxAttr" type="date">
-
-              <input v-model="this.newnoduedate" @change="this.newdate = ''" :placeholder="item.duedate" id="noduedate" type="checkbox">
-              <label for="noduedate">No due date</label>
-            <button @click="toggleEditDate(item.id)" class="menu-button">
-              <vue-feather type="x"></vue-feather>
-              Cancel
-            </button>
-            <button @click="editDate(item.id, this.newdate)" class="menu-button">
-              <vue-feather type="check"></vue-feather>
-              Save
-            </button>
+          <div :id="'editdate-' + item.id" class="menu-container menu-edit">
+              <div class="menu">
+                <ul class="menu-list">
+                  <li class="menu-item menu-item-flex menu-item-column">
+                      <input v-model="newdate" v-if="!this.newnoduedate" :placeholder="item.date" :min="this.$store.state.todayMaxAttr" type="date">
+                    <span class="menu-item-flex menu-item-date">
+                      <input v-model="this.newnoduedate" @change="this.newdate = ''" :placeholder="item.duedate" id="noduedate" type="checkbox">
+                      <label for="noduedate">No due date</label>
+                    </span>
+                    <button @click="toggleEditDate(item.id)" class="menu-button">
+                      <vue-feather type="x"></vue-feather>
+                      Cancel
+                    </button>
+                    <button @click="editDate(item.id, this.newdate)" class="menu-button">
+                      <vue-feather type="check"></vue-feather>
+                      Save
+                    </button>
+                  </li>
+                </ul>
+              </div>
           </div>
 
-          <div :id="'editpriority-' + item.id" class="menu-edit">
-            <label for="priority">Modify priority:</label>
-            <select id="priority" v-model="newpriority" name="priority">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
-            <button @click="toggleEditPriority(item.id)" class="menu-button">
-              <vue-feather type="x"></vue-feather>
-              Cancel
-            </button>
-            <button @click="editPriority(item.id, this.newpriority)" class="menu-button">
-              <vue-feather type="check"></vue-feather>
-              Save
-            </button>
+          <div :id="'editpriority-' + item.id" class="menu-container menu-edit">
+              <div class="menu">
+                <ul class="menu-list">
+                  <li class="menu-item">
+                    <label for="priority">Modify priority:</label>
+                    <select id="priority" v-model="newpriority" name="priority">
+                      <option value="low">Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                    <button @click="toggleEditPriority(item.id)" class="menu-button">
+                      <vue-feather type="x"></vue-feather>
+                      Cancel
+                    </button>
+                    <button @click="editPriority(item.id, this.newpriority)" class="menu-button">
+                      <vue-feather type="check"></vue-feather>
+                      Save
+                    </button>
+                  </li>
+                </ul>
+              </div>
           </div>
-
 
           <div 
             :class="item.priority"
@@ -171,13 +188,8 @@
 
   <div 
     v-if="this.menuactive !== null"
-    @click="this.menuactive = null" class="app-backdrop"></div>
-
-  <div 
-    v-if="this.addtaskopen == true"
-    @click="toggleaddtask" class="app-backdrop">
+    @click="this.menuactive = null" class="app-backdrop">
   </div>
-
 </template>
 <script>
 import { ref, onValue, update, remove } from "firebase/database"
@@ -192,8 +204,6 @@ export default {
       tasks: [],
       donetasks: [],
       notdonetasks: [],
-
-      addtaskopen: false,
 
       dataMessage: '',
       menuactive: null,

@@ -1,5 +1,4 @@
 <template>
-  <section class="app">
     <div v-if="this.$store.state.userid" class="sidebar">
       <nav>
         <vue-feather @click="togglemode" class="moon" type="moon"></vue-feather>
@@ -10,10 +9,12 @@
         <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
       </nav>
     </div>
-    <div class="content">
+    <div v-if="!this.$store.state.userid">
       <router-view/>
     </div>
-  </section>
+    <div v-if="this.$store.state.userid" class="content">
+      <router-view/>
+    </div>
 </template>
 <script>
 import { getAuth, signOut } from 'firebase/auth'
@@ -61,6 +62,9 @@ export default{
     }
   }
 }
+//TODO: => when location is denied and 'get current' ask for permission
+//TODO => add 'get current' button
+//TODO: => fix days to due date
 </script>
 <style lang="scss">
 @import '@/styles/AppStyle.scss';

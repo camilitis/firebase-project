@@ -124,21 +124,23 @@
     transform: translateY(-50%);
   }
 
-  .addtask-button{
-    color: var(--text-color);
-    text-decoration: none;
-    padding: 7px;
-    border-radius: var(--border-radius);
-    display: flex;
-    align-items: center;
-    background-color: var(--selected-color);
-    &:hover{
-      background-color: var(--selected-hover-color);
-      border-radius: 10px;
-    }
-    &-clicked{
-      background-color: var(--selected-hover-color);
-      border-radius: 10px;
+  .addtask{
+    &-button{
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 7px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      background-color: var(--selected-color);
+      &:hover{
+        background-color: var(--selected-hover-color);
+        border-radius: 10px;
+      }
+      &-clicked{
+        background-color: var(--selected-hover-color);
+        border-radius: 10px;
+      }
     }
   }
 
@@ -151,8 +153,14 @@
   @media screen and (max-width: 520px) {
     .projects-section { overflow: auto; }
     .project-boxes { overflow-y: visible; }
-    .status-number, .status-type {
-      font-size: 10px;
+    .project-box{
+      min-height: 120px;
+    }
+    .status-number{
+      font-size: 22px;
+    } 
+    .status-type {
+      font-size: 12px;
     }
     .project-boxes.jsGridView .project-box-wrapper {
       width: 100%;
@@ -165,15 +173,26 @@
       font-size: 18px;
     }
     .status-type {
-      padding-right: 4px;
+      padding-right: 0px;
     }
     .box-content-header {
-      font-size: 12px;
-      line-height: 16px;
+      font-size: 14px;
     }
     .days-left {
       font-size: 8px;
       padding: 6px 6px;
       text-align: center;
     }
+    .addtask-text{
+      display: none;
+    }
   }
+
+@media screen and (max-width: 340px){
+  .status-number{
+    font-size: 18px;
+  }
+  .status-type{
+    font-size: 10px;
+  }
+}

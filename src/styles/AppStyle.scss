@@ -18,6 +18,7 @@ html, body {
   transition: .2s;
   padding: 20px;
   color: var(--text-color);
+  display: flex;
 }
 :root{
   --bg-color: #F2F2F2;
@@ -57,9 +58,6 @@ html, body {
   cursor: pointer;
 }
 
-.app{
-  display: flex;
-}
 .sidebar{
   display: flex;
   flex-direction: column;
@@ -195,10 +193,11 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
 
 @media screen and (max-width: 520px) {
   #app{
-    padding: 0 10px;
+    padding: 10px;
   }
   .content{
-    padding: 15px;
+    padding: 13px;
+    height: 97vh;
   }
   .sidebar{
     width: auto;
@@ -210,5 +209,16 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
     svg{
       width: 20px;
     }
+  }
+}
+
+@media screen and (max-width: 340px){
+  .content{
+    padding: 10px;
+    height: 96vh;
+  }
+  .app-backdrop{
+    background-color: #000;
+    opacity: .5;
   }
 }

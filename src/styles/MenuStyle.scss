@@ -41,7 +41,7 @@
   &-sub-item{
     padding: 4px;
   }
-  &-sub-item + .menu-sub-item {
+  &-sub-item + .menu-sub-item{
     border-top: 1px solid #ddd;
   }
 
@@ -65,6 +65,21 @@
 
   &-item {
     position: relative;
+
+    &-flex{
+      display: flex;
+    }
+
+    &-column{
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-date{
+      margin: 3px;
+      padding: 3px;
+      align-items: center;
+    }
   }
 
   &-button {
@@ -112,22 +127,25 @@
   &-edit{
     display: none;
     position: absolute;
-    z-index: 100;
-    background-color: var(--content-section);
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(#404040, 0.15);
-    width: 33.3%;
     text-align: center;
     width: auto;
+
     &-show{
       display: block;
     }
+  }
 
-    input[type=text], input[type=date], input[type=radio], input[type=password], select{
-      border-radius: 8px;
-    }
+  input[type=text], input[type=date], input[type=radio], select{
+    border-radius: 8px;
+    padding: 6px 4px;
+    margin: 6px 2px;
+  };
+  input[type=checkbox]{
+    margin: 4px;
+    padding: 3px;
   }
 }
+
 
 .menu-svg-progress svg{
   stroke: var(--medium-bg-color);
@@ -146,6 +164,13 @@
 
     &-button{
       padding: 4px 4px;
+    }
+
+    &-edit{
+      width: 230px;
+      input{
+        width: auto;
+      }
     }
   }
 

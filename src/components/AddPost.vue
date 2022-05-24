@@ -28,6 +28,12 @@
       <p><a @click="addpost()" type="button">Add Post</a></p>
     </form>
   </div>
+
+  <div 
+    v-if="this.addtaskopen == true"
+    @click="toggleaddtask" class="app-backdrop">
+  </div>
+
 </template>
 <script>
 import { reactive, computed } from 'vue'
@@ -60,6 +66,8 @@ export default {
     return{
       duedate: '',
       noduedate: false,
+
+      addtaskopen: false,
     }
   },
 

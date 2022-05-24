@@ -22,7 +22,7 @@ export default createStore({
 
     numberOfTasks: null,
 
-    geoloaction:{
+    geolocation:{
       lat: null,
       lng: null
     }
@@ -64,8 +64,8 @@ export default createStore({
         let username = userinfo.find(user => user.info == 'username')
         this.state.username = username.value
 
-        let profilepicture = userinfo.find(user => user.info == 'profilepicture')
-        this.state.profilepicture = profilepicture.value
+        // let profilepicture = userinfo.find(user => user.info == 'profilepicture')
+        // this.state.profilepicture = profilepicture.value
       })
     },
   },
@@ -140,8 +140,8 @@ export default createStore({
 
     getlocation(){
       const successCallback = (position) =>{
-        this.state.geoloaction.lat = position.coords.latitude
-        this.state.geoloaction.lng = position.coords.longitude
+        this.state.geolocation.lat = position.coords.latitude
+        this.state.geolocation.lng = position.coords.longitude
       }
 
       const errorCallback = (error) =>{
