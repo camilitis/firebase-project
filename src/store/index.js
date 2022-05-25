@@ -23,6 +23,7 @@ export default createStore({
     numberOfTasks: null,
 
     geolocation:{
+      error: false,
       lat: null,
       lng: null
     }
@@ -127,10 +128,11 @@ export default createStore({
         var today = new Date()
         var hours = today.getHours()
         var minutes = today.getMinutes()
+        var seconds = today.getSeconds()
         if(minutes < 10){
-          var time = hours + ':0' + minutes
+          var time = hours + ':0' + minutes + ':' + seconds
         }else{
-          time = hours + ":" + minutes
+          time = hours + ":" + minutes + ":" + seconds
         }
 
         this.state.hours = hours
@@ -146,6 +148,7 @@ export default createStore({
 
       const errorCallback = (error) =>{
         console.log(error)
+        this.state.geolocation.error = true
       }
 
       navigator.geolocation.getCurrentPosition(successCallback, errorCallback,{

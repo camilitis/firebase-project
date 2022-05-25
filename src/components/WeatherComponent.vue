@@ -1,8 +1,9 @@
 <template>
-<section v-if="this.weather.cityName" :class="this.weather.description" class="weather-card">
+<section v-if="this.weather.cityName" :class="this.weather.img" class="weather-card">
   <div class="weather-card-blur">
   </div>
     <h2 class="weather-card-text">{{this.weather.temperature}}</h2>
+    <h4 class="weather-card-text">{{this.weather.description}}</h4>
     <a @click="changelocationmode" class="weather-card-text-city">{{this.weather.cityName}}, {{this.weather.country}}</a>
 
   <div id="changelocationmode" class="menu-container menu-weather">
@@ -16,7 +17,7 @@
             </button>
           </li>
         </ul>
-        <ul v-if="this.locationtype == 'city'" class="menu-list">
+        <ul v-if="this.locationtype == 'city' && this.$store.state.geolocation.error == false" class="menu-list">
           <li class="menu-item">
             <button @click="getWeather" class="menu-button">
               <vue-feather type="map-pin"></vue-feather>
@@ -47,6 +48,7 @@ export default {
         country: null,
         temperature: null,
         description: null,
+        img: null,
       }
     }
   },
@@ -63,9 +65,9 @@ export default {
     getWeather: async function (){
       this.locationtype = 'lonlat'
 
-      const VUE_APP_API_KEY = process.env.VUE_APP_API_KEY
+      const VUE_APP_WEATHER_API_KEY = process.env.VUE_APP_WEATHER_API_KEY
 
-      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geolocation.lat}&lon=${this.$store.state.geolocation.lng}&appid=${VUE_APP_API_KEY}&units=metric`
+      const latURL = `http://api.openweathermap.org/data/2.5/weather?lat=${this.$store.state.geolocation.lat}&lon=${this.$store.state.geolocation.lng}&appid=${VUE_APP_WEATHER_API_KEY}&units=metric`
 
       if(this.locationtype == 'lonlat'){
         try{
@@ -76,21 +78,22 @@ export default {
           this.weather.cityName = data.name
           this.weather.country = data.sys.country
           this.weather.temperature = Math.round(data.main.temp) + '°C'
+          this.weather.description = data.weather[0].description
 
           const timeOfDay = data.weather[0].icon
           const weatherConditions = data.weather[0].main
 
           if(weatherConditions === 'Clouds') {
-            this.weather.description = 'cloudy'
+            this.weather.img = 'cloudy'
           }else if(weatherConditions === 'Snow'){
-            this.weather.description = 'snowy'
+            this.weather.img = 'snowy'
           }else if(weatherConditions === 'Thunderstorm' || weatherConditions === 'Drizzle' || weatherConditions === 'Rain'){
-            this.weather.description = 'rainy'
+            this.weather.img = 'rainy'
           }else if (weatherConditions === 'Clear' || weatherConditions == '') {
             if (timeOfDay.includes("n")) {
-              this.weather.description = 'clear-night'
+              this.weather.img = 'clear-night'
             }else {
-              this.weather.description = 'clear-day'
+              this.weather.img = 'clear-day'
             }
           }
         } catch(error){
@@ -100,11 +103,11 @@ export default {
     },
 
     changecity: async function (){
-      this.locationtype = 'city'
-      const VUE_APP_API_KEY = process.env.VUE_APP_API_KEY
-      const cityURL = `https://api.openweathermap.org/data/2.5/weather?q=${this.entercityname}&appid=${VUE_APP_API_KEY}&units=metric`;
+      const VUE_APP_WEATHER_API_KEY = process.env.VUE_APP_WEATHER_API_KEY
+      const cityURL = `https://api.openweathermap.org/data/2.5/weather?q=${this.entercityname}&appid=${VUE_APP_WEATHER_API_KEY}&units=metric`;
 
       if(this.entercityname){
+        this.locationtype = 'city'
         try{
           const response = await fetch(cityURL)
           const data = await response.json()
@@ -113,21 +116,22 @@ export default {
           this.weather.cityName = data.name
           this.weather.country = data.sys.country
           this.weather.temperature = Math.round(data.main.temp) + '°C'
+          this.weather.description = data.weather[0].description
 
           const timeOfDay = data.weather[0].icon
           const weatherConditions = data.weather[0].main
 
           if(weatherConditions === 'Clouds') {
-            this.weather.description = 'cloudy'
+            this.weather.img = 'cloudy'
           }else if(weatherConditions === 'Snow'){
-            this.weather.description = 'snowy'
+            this.weather.img = 'snowy'
           }else if(weatherConditions === 'Thunderstorm' || weatherConditions === 'Drizzle' || weatherConditions === 'Rain'){
-            this.weather.description = 'rainy'
+            this.weather.img = 'rainy'
           }else if (weatherConditions === 'Clear' || weatherConditions == '') {
             if (timeOfDay.includes("n")) {
-              this.weather.description = 'clear-night'
+              this.weather.img = 'clear-night'
             }else {
-              this.weather.description = 'clear-day'
+              this.weather.img = 'clear-day'
             }
           }
 
@@ -146,6 +150,12 @@ export default {
   },
   created: function(){
     this.getWeather()
+  },
+  mounted(){
+    if(this.$store.state.geolocation.error == true){
+      this.entercityname = 'Tokio'
+      this.changecity()
+    }
   }
 }
 </script>
@@ -184,8 +194,11 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
 
   &-text{
     -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+    margin-left: 20px;
+    text-transform: capitalize;
     &-city{
     cursor: pointer;
+    margin-left: 20px;
       &:hover{
         text-decoration: underline;
       }

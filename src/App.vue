@@ -62,8 +62,6 @@ export default{
     }
   }
 }
-//TODO: => when location is denied and 'get current' ask for permission
-//TODO => add 'get current' button
 </script>
 <style lang="scss">
 @import '@/styles/AppStyle.scss';

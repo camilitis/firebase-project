@@ -31,7 +31,7 @@
     background: var(--content-section);
   }
   *::-webkit-scrollbar-thumb {
-    background-color: var(--selected-color);
+    background: var(--selected-color);
     border-radius: 10px;
   }
 
