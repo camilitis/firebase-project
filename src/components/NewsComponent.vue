@@ -1,11 +1,15 @@
 <template>
 <section class="articles-container">
   <ul>
-    <li v-for="article of articles" :key="article.title"><a :href="article.url">
-      <h1>{{article.title}}</h1>
-      <h2>{{article.author}}</h2>
-      <p>{{article.description}}</p>
-    </a></li>
+    <li v-for="article of articles" :key="article.title"><a :href="article.url" target="_blank" rel="noopener noreferrer" class="showhim article">
+      <span class="article-title">
+        {{article.title}}
+      </span>
+      <span class="article-author"> - {{article.author}}</span>
+      <span class="showme"><vue-feather type="external-link"></vue-feather></span>
+      <p class="article-description">{{article.content}}</p>
+    </a>
+    </li>
   </ul>
 </section>
 </template>
@@ -26,7 +30,6 @@ export default {
         const data = await response.json()
 
         this.articles = data.articles
-        console.log(data.articles)
       }catch(error){
         console.log(error)
       }
@@ -41,20 +44,47 @@ export default {
 .articles-container{
   overflow-y: scroll;
   height: 200px;
+  width: 600px;
 
   li + li{
     border-top: 1px solid #ddd;
+    padding: 15px 0px;
+  }
+
+  ul{
+    list-style: none;
+    padding: 0;
+    a{
+      color: var(--text-color);
+      text-decoration: none;
+    }
   }
 }
-ul{
-  list-style: none;
-  padding: 0;
-  a{
-    color: var(--text-color);
-    text-decoration: none;
+
+.article{
+  &:hover{
+    opacity: .7;
   }
-  h1{
-    color: var(--selected-color)
+  &-title{
+    color: var(--selected-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1.5;
   }
+  &-author{
+    font-weight: 600;
+  }
+  svg{
+    width: 20px;
+    margin: 0 10px;
+  }
+}
+
+.showme {
+  display: none;
+}
+
+.showhim:hover .showme {
+  display: inline;
 }
 </style>

@@ -100,6 +100,7 @@ export default {
           console.log(error)
         }
       }
+      this.changelocationmode()
     },
 
     changecity: async function (){
@@ -146,6 +147,7 @@ export default {
       }else{
         alert('Please enter a city name')
       }
+      this.changelocationmode()
     }
   },
   created: function(){
@@ -169,7 +171,7 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
 }
 
 .weather-card{
-  max-width: 350px;
+  max-width: 400px;
   border: 3px solid var(--text-color);
   border-radius: 10px;
   height: 150px;
@@ -178,6 +180,7 @@ input[type=text], input[type=date], input[type=radio], input[type=password], sel
   transition: .2s;
   color: rgb(212, 212, 212);
   transition: .2s;
+  margin: auto;
 
   &:hover{
     opacity: 1;

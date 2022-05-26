@@ -5,13 +5,19 @@
     <h4>
       <span v-if="this.$store.state.hours >= 5 && this.$store.state.hours < 12">Good morning</span>
       <span v-if="this.$store.state.hours >= 12 && this.$store.state.hours < 19">Good afternoon</span>
-      <span v-if="this.$store.state.hours >= 19 && this.$store.state.hours < 23 || this.$store.state.hours >= 0 && this.$store.state.hours < 5">Good evening</span>,
+      <span v-if="this.$store.state.hours >= 19 && this.$store.state.hours <= 23 || this.$store.state.hours >= 0 && this.$store.state.hours < 5">Good evening</span>,
       {{this.$store.state.username}}
     </h4>
   </div>
   <section class="home-components">
+    <div class="home-components-comp">
     <WeatherComponent/>
+    <p>Click the location to change the city</p>
+    </div>
+    <div class="home-components-comp">
+      <h2>Latest news</h2>
     <NewsComponent/>
+    </div>
   </section>
 </template>
 <script>

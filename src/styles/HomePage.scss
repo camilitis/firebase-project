@@ -11,6 +11,15 @@
   &-components{
     display: grid;
     grid-template-columns: 50% 50%;
+    align-items: center;
+
+    &-comp{
+      width: 100%;
+      p{
+        text-align: center;
+        opacity: .6;
+      }
+    }
   }
 }
 
