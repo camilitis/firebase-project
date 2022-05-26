@@ -1,4 +1,8 @@
 .home{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 100px 0;
+
   &-time{
     font-size: 40px;
     color: var(--font-color);
@@ -8,26 +12,17 @@
     -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
   }
 
-  &-components{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    align-items: center;
-
-    &-comp{
-      width: 100%;
-      p{
-        text-align: center;
-        opacity: .6;
-      }
+  &-section{
+    p{
+      text-align: center;
+      opacity: .7;
     }
   }
 }
 
 @media screen and (max-width: 1000px) {
   .home{
-    &-components{
-      grid-template-rows: 50% 50%;
-      grid-template-columns: none;
-    }
+    grid-template-rows: 50% 50%;
+    grid-template-columns: none;
   }
 }

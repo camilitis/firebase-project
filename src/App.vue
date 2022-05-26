@@ -4,8 +4,8 @@
         <vue-feather @click="togglemode" class="moon" type="moon"></vue-feather>
         <router-link to="/"><vue-feather type="home"></vue-feather><p class="sidebar-text">My home</p></router-link>
         <router-link to="/tasks"><vue-feather type="calendar"></vue-feather><p class="sidebar-text">My tasks</p></router-link>
-        <span style="cursor: not-allowed;"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></span>
-        <span style="cursor: not-allowed;"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></span>
+        <!-- <span style="cursor: not-allowed;"><vue-feather type="edit-3"></vue-feather><p class="sidebar-text">Wish List</p></span> -->
+        <!-- <span style="cursor: not-allowed;"><vue-feather type="settings"></vue-feather><p class="sidebar-text">Settings</p></span> -->
         <span @click="logout"><vue-feather type="log-out"></vue-feather><p class="sidebar-text">Logout</p></span>
       </nav>
     </div>
